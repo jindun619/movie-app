@@ -23,7 +23,7 @@ export type MovieDetailType = {
   genres: {
     id: number;
     name: string;
-  };
+  }[];
   homepage: string;
   id: number;
   imdb_id: string;
