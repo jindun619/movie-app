@@ -57,6 +57,7 @@ const SimpleMovieList = ({data}: SimpleMovieListProps) => {
   return (
     <FlatList
       horizontal
+      showsHorizontalScrollIndicator={false}
       data={data}
       renderItem={renderItem}
       ItemSeparatorComponent={Separator}

@@ -1,11 +1,9 @@
 import styled from 'styled-components/native';
 import {useQuery} from '@tanstack/react-query';
-import {fetchNowPlaying, fetchPopular} from '../fetch';
-import {useEffect} from 'react';
+// import {fetchNowPlaying, fetchPopular} from '../fetch';
+import {fetchData} from '../fetch';
 import {SimpleMovieList} from '../components/SimpleMovieList';
-import {Block} from '../components/Block';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-import {Button, Text} from 'react-native';
+import {MovieListBlock} from '../components/MovieListBlock';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootNavParamList} from '../navigations/RootNav';
 
@@ -32,7 +30,7 @@ const Home = ({navigation}: HomeProps) => {
     error: nowPlayingError,
   } = useQuery({
     queryKey: ['nowPlaying'],
-    queryFn: () => fetchNowPlaying(),
+    queryFn: () => fetchData.nowPlaying(),
   });
   const {
     data: popularData,
@@ -40,25 +38,21 @@ const Home = ({navigation}: HomeProps) => {
     error: popularError,
   } = useQuery({
     queryKey: ['popular'],
-    queryFn: () => fetchPopular(),
+    queryFn: () => fetchData.popular(),
   });
 
   return (
     <Container>
       <ScrollView>
-        <Button
-          title="Go to Details"
-          onPress={() => navigation.navigate('detail')}
-        />
         {!nowPlayingLoading && (
-          <Block title="지금 상영중">
+          <MovieListBlock title="지금 상영중">
             <SimpleMovieList data={nowPlayingData.results} />
-          </Block>
+          </MovieListBlock>
         )}
         {!popularLoading && (
-          <Block title="인기 영화">
+          <MovieListBlock title="인기 영화">
             <SimpleMovieList data={popularData.results} />
-          </Block>
+          </MovieListBlock>
         )}
       </ScrollView>
     </Container>

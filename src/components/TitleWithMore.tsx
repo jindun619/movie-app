@@ -1,10 +1,7 @@
 import styled from 'styled-components/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const Container = styled.View`
-  margin-bottom: 30px;
-`;
-const TextContainer = styled.TouchableOpacity`
+const Container = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
 `;
@@ -18,20 +15,16 @@ const ChevronIcon = styled(Icon)`
   color: ${props => props.theme.neutralText};
 `;
 
-interface BlockProps {
+interface TitleWithMoreProps {
   title: string;
-  children: React.ReactNode;
 }
-const Block = ({title, children}: BlockProps) => {
+const TitleWithMore = ({title}: TitleWithMoreProps) => {
   return (
     <Container>
-      <TextContainer>
-        <Title>{title}</Title>
-        <ChevronIcon name="chevron-forward-outline" size={24} />
-      </TextContainer>
-      {children}
+      <Title>{title}</Title>
+      <ChevronIcon name="chevron-forward-outline" size={24} />
     </Container>
   );
 };
 
-export {Block};
+export {TitleWithMore};
