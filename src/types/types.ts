@@ -15,6 +15,12 @@ export type MovieType = {
   vote_count: number;
 };
 
+export type ProductionCompanyType = {
+  id: number;
+  logo_path: string;
+  name: string;
+  original_country: string;
+};
 export type MovieDetailType = {
   adult: boolean;
   backdrop_path: string;
@@ -33,16 +39,11 @@ export type MovieDetailType = {
   overview: string;
   popularity: number;
   poster_path: string;
-  production_companies: {
-    id: number;
-    logo_path: string;
-    name: string;
-    original_country: string;
-  };
+  production_companies: ProductionCompanyType[];
   production_countries: {
     iso_3166_1: string;
     name: string;
-  };
+  }[];
   release_date: string;
   revenue: number;
   runtime: number;

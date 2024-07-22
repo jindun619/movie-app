@@ -1,5 +1,6 @@
 import Icon from 'react-native-vector-icons/Ionicons';
 import styled from 'styled-components/native';
+import {CrewType} from '../../types/types';
 
 const Container = styled.View`
   flex-direction: row;
@@ -24,15 +25,10 @@ const OriginalTitle = styled.Text`
   font-weight: 500;
   color: ${props => props.theme.mainText};
 `;
-const RateContainer = styled.View`
+const DateAndRuntime = styled.View`
   flex-direction: row;
   margin-top: 4px;
 `;
-const Rate = styled.Text`
-  font-size: 12px;
-  color: ${props => props.theme.neutralText};
-`;
-const StarIcon = styled(Icon)``;
 const Date = styled.Text`
   font-size: 14px;
   font-weight: 500;
@@ -43,9 +39,33 @@ const Runtime = styled.Text`
   font-weight: 500;
   color: ${props => props.theme.neutralText};
 `;
+const DirectorContainer = styled.View`
+  margin-top: 4px;
+  flex-direction: row;
+`;
+const DirectorText = styled.Text`
+  font-size: 14px;
+  font-weight: 400;
+  color: ${props => props.theme.mainText};
+`;
+const TouchableOpacity = styled.TouchableOpacity``;
+const DirectorNameText = styled.Text`
+  font-size: 14px;
+  font-weight: 400;
+  color: ${props => props.theme.defaultBtn};
+`;
+const RateContainer = styled.View`
+  flex-direction: row;
+  margin-top: 4px;
+`;
+const Rate = styled.Text`
+  font-size: 12px;
+  color: ${props => props.theme.neutralText};
+`;
+const StarIcon = styled(Icon)``;
 const GenresContainer = styled.View`
   width: 100%;
-  margin-top: 2px;
+  margin-top: 4px;
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
@@ -58,17 +78,15 @@ const GenreText = styled.Text`
   font-size: 18px;
   color: ${props => props.theme.defaultBtn};
 `;
-const BackdropImage = styled.Image`
-  width: 100%;
-  height: 300px;
-`;
 
 interface MovieInfoProps {
   posterPath: string;
   title: string;
   originalTitle: string;
   releaseDate: string;
+  crewData: CrewType[];
   voteAverage: number;
+  voteCount: number;
   runtime: number;
   genres: {id: number; name: string}[];
 }
@@ -77,10 +95,14 @@ const MovieInfo = ({
   title,
   originalTitle,
   releaseDate,
+  crewData,
   voteAverage,
+  voteCount,
   runtime,
   genres,
 }: MovieInfoProps) => {
+  const director = crewData.filter(({job}) => job === 'Director')[0].name;
+
   return (
     <Container>
       <PosterImage
@@ -91,12 +113,20 @@ const MovieInfo = ({
       <Info>
         <Title>{title}</Title>
         <OriginalTitle>({originalTitle})</OriginalTitle>
-        <Date>{releaseDate}</Date>
+        <DateAndRuntime>
+          <Date>{releaseDate} · </Date>
+          <Runtime>러닝타임 {runtime}분</Runtime>
+        </DateAndRuntime>
+        <DirectorContainer>
+          <DirectorText>감독 </DirectorText>
+          <TouchableOpacity>
+            <DirectorNameText>{director}</DirectorNameText>
+          </TouchableOpacity>
+        </DirectorContainer>
         <RateContainer>
           <StarIcon name="star" color="#FFDF00" />
-          <Rate>{voteAverage ? Math.round(voteAverage * 10) / 10 : ''}</Rate>
+          <Rate>{`${Math.round(voteAverage * 10) / 10} (${voteCount})`}</Rate>
         </RateContainer>
-        <Runtime>러닝타임 {runtime}분</Runtime>
         <GenresContainer>
           {genres.map(({name}) => (
             <Genre key={name}>

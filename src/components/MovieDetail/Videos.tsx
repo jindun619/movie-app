@@ -1,50 +1,40 @@
 import {FlatList as RNFlatList} from 'react-native';
 import styled from 'styled-components/native';
-import Video from 'react-native-video';
 import {TitleWithMore} from '../TitleWithMore';
 import {MovieVideosType, MovieVideoType} from '../../types/types';
+import YoutubePlayer from 'react-native-youtube-iframe';
 
 const Container = styled.View`
   padding: 10px;
+  background-color: ${props => props.theme.lightNeutralBg};
 `;
 const FlatList = styled.FlatList`` as unknown as typeof RNFlatList;
+const Separator = styled.View`
+  width: 5px;
+`;
 
 interface VideosProps {
   data: MovieVideosType;
 }
 const Videos = ({data}: VideosProps) => {
-  return (
-    <Container>
-      <TitleWithMore title="동영상" />
-      {/* <FlatList
-        horizontal
-        data={data.results}
-        renderItem={({item}: {item: MovieVideoType}) => {
-          console.log(`https://www.youtube.com/watch?v=${item.key}`);
-          return (
-            <Video
-              source={{
-                uri: `https://www.youtube.com/watch?v=EiCmnIaj4u8`,
-              }}
-              style={{width: 180, height: 120}}
-              controls={true}
-              paused={true}
-              resizeMode="contain"
-            />
-          );
-        }}
-      /> */}
-      <Video
-        source={{
-          uri: `https://www.youtube.com/watch?v=EiCmnIaj4u8`,
-        }}
-        style={{width: 180, height: 120}}
-        controls={true}
-        paused={true}
-        resizeMode="contain"
-      />
-    </Container>
-  );
+  if (data.results.length > 0) {
+    return (
+      <Container>
+        <TitleWithMore title="동영상" />
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          data={data.results}
+          renderItem={({item}: {item: MovieVideoType}) => {
+            return (
+              <YoutubePlayer videoId={item.key} width={250} height={150} />
+            );
+          }}
+          ItemSeparatorComponent={Separator}
+        />
+      </Container>
+    );
+  }
 };
 
 export {Videos};

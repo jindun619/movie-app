@@ -13,6 +13,7 @@ import {MovieInfo} from '../components/MovieDetail/MovieInfo';
 import {Overview} from '../components/MovieDetail/Overview';
 import {Credits} from '../components/MovieDetail/Credits';
 import {Videos} from '../components/MovieDetail/Videos';
+import {Production} from '../components/MovieDetail/Production';
 
 const Container = styled.View`
   flex: 1;
@@ -33,7 +34,7 @@ type DetailScreenProps = StackScreenProps<RootNavParamList, 'detail'>;
 const Detail = ({route}: DetailScreenProps) => {
   const {id} = route.params;
   const {
-    data: movieData,
+    data: detailData,
     isLoading: movieLoading,
     error: movieError,
   } = useQuery<MovieDetailType>({
@@ -60,27 +61,37 @@ const Detail = ({route}: DetailScreenProps) => {
   return (
     <Container>
       <ScrollView>
-        <BackdropImage
-          source={{
-            uri: `https://image.tmdb.org/t/p/w780${movieData?.backdrop_path}`,
-          }}
-        />
-        {movieData && (
-          <ScrollViewContent>
-            <MovieInfo
-              posterPath={`https://image.tmdb.org/t/p/w500${movieData?.poster_path}`}
-              title={movieData.title}
-              originalTitle={movieData.original_title}
-              releaseDate={movieData.release_date}
-              voteAverage={movieData.vote_average}
-              runtime={movieData.runtime}
-              genres={movieData.genres}
-            />
-            <Overview overview={movieData.overview} />
-          </ScrollViewContent>
+        {detailData && (
+          <BackdropImage
+            source={{
+              uri: `https://image.tmdb.org/t/p/w780${detailData.backdrop_path}`,
+            }}
+          />
         )}
-        {creditsData && <Credits data={creditsData} />}
-        {videosData && <Videos data={videosData} />}
+        <ScrollViewContent>
+          {detailData && creditsData && (
+            <MovieInfo
+              posterPath={`https://image.tmdb.org/t/p/w500${detailData?.poster_path}`}
+              title={detailData.title}
+              originalTitle={detailData.original_title}
+              releaseDate={detailData.release_date}
+              crewData={creditsData.crew}
+              voteAverage={detailData.vote_average}
+              voteCount={detailData.vote_count}
+              runtime={detailData.runtime}
+              genres={detailData.genres}
+            />
+          )}
+          {detailData && (
+            <Overview
+              tagline={detailData.tagline}
+              overview={detailData.overview}
+            />
+          )}
+          {creditsData && <Credits data={creditsData} />}
+          {videosData && <Videos data={videosData} />}
+          {detailData && <Production data={detailData} />}
+        </ScrollViewContent>
       </ScrollView>
     </Container>
   );
