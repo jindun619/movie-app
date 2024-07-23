@@ -1,31 +1,36 @@
 import {createStackNavigator} from '@react-navigation/stack';
-import Home from '../screens/Home';
 import Detail from '../screens/Detail';
 import {Tabs} from './Tabs';
+import {Person} from '../screens/Person';
 
 export type RootNavParamList = {
   Tab: undefined;
-  detail: {id: number};
+  Detail: {id: number};
+  Person: {id: number};
 };
 
 const Stack = createStackNavigator<RootNavParamList>();
 
 const RootNav = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerBackTitleVisible: false,
+      }}>
       <Stack.Screen
         name="Tab"
         component={Tabs}
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="detail"
+        name="Detail"
         component={Detail}
-        options={{
-          headerBackTitleVisible: false,
-          headerTitle: '',
-          headerTransparent: true,
-        }}
+        options={{headerTitle: '', headerTransparent: true}}
+      />
+      <Stack.Screen
+        name="Person"
+        component={Person}
+        options={{headerTitle: '인물 정보'}}
       />
     </Stack.Navigator>
   );

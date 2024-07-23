@@ -40,7 +40,7 @@ const SimpleMovieList = ({data}: SimpleMovieListProps) => {
   const navigation = useNavigation<NavigationProp<RootNavParamList>>();
 
   const renderItem: ListRenderItem<MovieType> = ({item}) => (
-    <Poster onPress={() => navigation.navigate('detail', {id: item.id})}>
+    <Poster onPress={() => navigation.navigate('Detail', {id: item.id})}>
       <Image
         source={{uri: `https://image.tmdb.org/t/p/w500/${item.poster_path}`}}
       />

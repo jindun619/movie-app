@@ -33,8 +33,8 @@ const BackdropImage = styled.Image`
 `;
 const ScrollViewContent = styled.View``;
 
-type DetailScreenProps = StackScreenProps<RootNavParamList, 'detail'>;
-const Detail = ({route}: DetailScreenProps) => {
+type DetailScreenProps = StackScreenProps<RootNavParamList, 'Detail'>;
+const Detail = ({route, navigation}: DetailScreenProps) => {
   const {id} = route.params;
   const {
     data: detailData,
@@ -42,7 +42,7 @@ const Detail = ({route}: DetailScreenProps) => {
     error: movieError,
   } = useQuery<MovieDetailType>({
     queryKey: ['detail', id],
-    queryFn: () => fetchData.detail(id),
+    queryFn: () => fetchData.movie.detail(id),
   });
   const {
     data: creditsData,
@@ -50,7 +50,7 @@ const Detail = ({route}: DetailScreenProps) => {
     error: creditsError,
   } = useQuery<MovieCreditsType>({
     queryKey: ['credits', id],
-    queryFn: () => fetchData.credits(id),
+    queryFn: () => fetchData.movie.credits(id),
   });
   const {
     data: videosData,
@@ -58,7 +58,7 @@ const Detail = ({route}: DetailScreenProps) => {
     error: videosError,
   } = useQuery<MovieVideosType>({
     queryKey: ['video', id],
-    queryFn: () => fetchData.videos(id),
+    queryFn: () => fetchData.movie.videos(id),
   });
   const {
     data: recommData,
@@ -66,7 +66,7 @@ const Detail = ({route}: DetailScreenProps) => {
     error: recommError,
   } = useQuery<RecommType>({
     queryKey: ['recomm', id],
-    queryFn: () => fetchData.recomm(id),
+    queryFn: () => fetchData.movie.recomm(id),
   });
 
   return (

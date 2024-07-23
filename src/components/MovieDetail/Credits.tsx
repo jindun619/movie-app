@@ -2,6 +2,9 @@ import styled from 'styled-components/native';
 import {CastType, MovieCreditsType} from '../../types/types';
 import {FlatList as RNFlatList} from 'react-native-gesture-handler';
 import {TitleWithMore} from '../TitleWithMore';
+import {useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RootNavParamList} from '../../navigations/RootNav';
 
 const Container = styled.View`
   padding: 10px;
@@ -36,8 +39,14 @@ interface CreditsProps {
   data: MovieCreditsType;
 }
 const Credits = ({data}: CreditsProps) => {
+  const navigation =
+    useNavigation<StackNavigationProp<RootNavParamList, 'Detail'>>();
+
   const renderItem = ({item}: {item: CastType}) => (
-    <ProfileImageContainer>
+    <ProfileImageContainer
+      onPress={() => {
+        navigation.navigate('Person', {id: item.id});
+      }}>
       <ProfileImage
         source={{
           uri: `https://image.tmdb.org/t/p/w185${item.profile_path}`,

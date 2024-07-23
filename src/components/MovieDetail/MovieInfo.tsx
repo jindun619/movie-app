@@ -1,6 +1,9 @@
 import Icon from 'react-native-vector-icons/Ionicons';
 import styled from 'styled-components/native';
 import {CrewType} from '../../types/types';
+import {useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RootNavParamList} from '../../navigations/RootNav';
 
 const Container = styled.View`
   flex-direction: row;
@@ -71,13 +74,12 @@ const GenresContainer = styled.View`
   flex-wrap: wrap;
   align-items: center;
 `;
-const Genre = styled.TouchableOpacity`
+const Genre = styled.Text`
   margin-top: 5px;
   padding-right: 5px;
-`;
-const GenreText = styled.Text`
-  font-size: 18px;
-  color: ${props => props.theme.defaultBtn};
+  font-size: 16px;
+  font-weight: 400;
+  color: ${props => props.theme.mainText};
 `;
 
 interface MovieInfoProps {
@@ -102,7 +104,10 @@ const MovieInfo = ({
   runtime,
   genres,
 }: MovieInfoProps) => {
-  const director = crewData.filter(({job}) => job === 'Director')[0].name;
+  const navigation = useNavigation<StackNavigationProp<RootNavParamList>>();
+
+  const directorName = crewData.filter(({job}) => job === 'Director')[0].name;
+  const directorId = crewData.filter(({job}) => job === 'Director')[0].id;
 
   return (
     <Container>
@@ -120,8 +125,11 @@ const MovieInfo = ({
         </DateAndRuntime>
         <DirectorContainer>
           <DirectorText>감독 </DirectorText>
-          <TouchableOpacity>
-            <DirectorNameText>{director}</DirectorNameText>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('Person', {id: directorId});
+            }}>
+            <DirectorNameText>{directorName}</DirectorNameText>
           </TouchableOpacity>
         </DirectorContainer>
         <RateContainer>
@@ -130,9 +138,7 @@ const MovieInfo = ({
         </RateContainer>
         <GenresContainer>
           {genres.map(({name}) => (
-            <Genre key={name}>
-              <GenreText>{name}</GenreText>
-            </Genre>
+            <Genre key={name}>{name}</Genre>
           ))}
         </GenresContainer>
       </Info>
