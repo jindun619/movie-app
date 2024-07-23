@@ -6,7 +6,7 @@ import YoutubePlayer from 'react-native-youtube-iframe';
 
 const Container = styled.View`
   padding: 10px;
-  background-color: ${props => props.theme.lightNeutralBg};
+  border: 1px solid ${props => props.theme.lightNeutralBg};
 `;
 const FlatList = styled.FlatList`` as unknown as typeof RNFlatList;
 const Separator = styled.View`

@@ -1,24 +1,11 @@
 import styled from 'styled-components/native';
 import {CastType, MovieCreditsType} from '../../types/types';
-import Icon from 'react-native-vector-icons/Ionicons';
 import {FlatList as RNFlatList} from 'react-native-gesture-handler';
 import {TitleWithMore} from '../TitleWithMore';
 
 const Container = styled.View`
   padding: 10px;
-`;
-const TextContainer = styled.TouchableOpacity`
-  flex-direction: row;
-  align-items: center;
-`;
-const Title = styled.Text`
-  font-size: 20px;
-  font-weight: 600;
-  color: ${props => props.theme.mainText};
-  margin: 5px 0;
-`;
-const ChevronIcon = styled(Icon)`
-  color: ${props => props.theme.neutralText};
+  border: 1px solid ${props => props.theme.lightNeutralBg};
 `;
 const FlatList = styled.FlatList`` as unknown as typeof RNFlatList;
 const ProfileImageContainer = styled.TouchableOpacity`
@@ -32,12 +19,14 @@ const ProfileImage = styled.Image`
   border: 0.1px solid ${props => props.theme.mainText};
 `;
 const NameText = styled.Text`
+  text-align: center;
   margin-top: 5px;
   font-size: 16px;
   font-weight: 600;
   color: ${props => props.theme.mainText};
 `;
 const CharacterText = styled.Text`
+  text-align: center;
   font-size: 12px;
   font-weight: 400;
   color: ${props => props.theme.mainText};

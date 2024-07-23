@@ -9,7 +9,7 @@ interface BlockProps {
   title: string;
   children: React.ReactNode;
 }
-const MovieListBlock = ({title, children}: BlockProps) => {
+const ListBlock = ({title, children}: BlockProps) => {
   return (
     <Container>
       <TitleWithMore title={title} />
@@ -18,4 +18,4 @@ const MovieListBlock = ({title, children}: BlockProps) => {
   );
 };
 
-export {MovieListBlock};
+export {ListBlock};

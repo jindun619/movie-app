@@ -13,6 +13,7 @@ export type MovieType = {
   video: boolean;
   vote_average: number;
   vote_count: number;
+  media_type?: string;
 };
 
 export type ProductionCompanyType = {
@@ -108,4 +109,23 @@ export type MovieVideoType = {
 export type MovieVideosType = {
   id: number;
   results: MovieVideoType[];
+};
+
+export type RecommType = {
+  page: number;
+  results: MovieType[];
+  total_pages: number;
+  total_results: number;
+};
+
+export type PersonType = {
+  adult: boolean;
+  gender: number;
+  id: number;
+  known_for_department: string;
+  name: string;
+  original_name: string;
+  popularity: number;
+  profile_path: string;
+  known_for: MovieType[];
 };

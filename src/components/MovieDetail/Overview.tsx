@@ -1,8 +1,8 @@
 import styled from 'styled-components/native';
 
-const OverviewContainer = styled.View`
+const Container = styled.View`
   padding: 15px;
-  background-color: ${props => props.theme.lightNeutralBg};
+  border: 1px solid ${props => props.theme.lightNeutralBg};
 `;
 const Tagline = styled.Text`
   font-size: 18px;
@@ -11,13 +11,13 @@ const Tagline = styled.Text`
   font-style: italic;
 `;
 
-const OverviewTitle = styled.Text`
+const Title = styled.Text`
   margin-top: 5px;
   font-size: 20px;
   font-weight: 500;
   color: ${props => props.theme.mainText};
 `;
-const OverviewContent = styled.Text`
+const Content = styled.Text`
   margin-top: 5px;
   font-size: 14px;
   font-weight: 400;
@@ -31,11 +31,11 @@ interface OverviewProps {
 const Overview = ({tagline, overview}: OverviewProps) => {
   if (overview) {
     return (
-      <OverviewContainer>
+      <Container>
         <Tagline>{tagline}</Tagline>
-        <OverviewTitle>개요</OverviewTitle>
-        <OverviewContent>{overview}</OverviewContent>
-      </OverviewContainer>
+        <Title>개요</Title>
+        <Content>{overview}</Content>
+      </Container>
     );
   }
 };

@@ -7,13 +7,16 @@ import {StackScreenProps} from '@react-navigation/stack';
 import {
   MovieCreditsType,
   MovieDetailType,
+  MovieType,
   MovieVideosType,
+  RecommType,
 } from '../types/types';
 import {MovieInfo} from '../components/MovieDetail/MovieInfo';
 import {Overview} from '../components/MovieDetail/Overview';
 import {Credits} from '../components/MovieDetail/Credits';
 import {Videos} from '../components/MovieDetail/Videos';
 import {Production} from '../components/MovieDetail/Production';
+import {Recomm} from '../components/MovieDetail/Recomm';
 
 const Container = styled.View`
   flex: 1;
@@ -57,6 +60,14 @@ const Detail = ({route}: DetailScreenProps) => {
     queryKey: ['video', id],
     queryFn: () => fetchData.videos(id),
   });
+  const {
+    data: recommData,
+    isLoading: recommLoading,
+    error: recommError,
+  } = useQuery<RecommType>({
+    queryKey: ['recomm', id],
+    queryFn: () => fetchData.recomm(id),
+  });
 
   return (
     <Container>
@@ -91,6 +102,7 @@ const Detail = ({route}: DetailScreenProps) => {
           {creditsData && <Credits data={creditsData} />}
           {videosData && <Videos data={videosData} />}
           {detailData && <Production data={detailData} />}
+          {recommData && <Recomm data={recommData} />}
         </ScrollViewContent>
       </ScrollView>
     </Container>

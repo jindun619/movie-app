@@ -10,10 +10,6 @@ import {useEffect, useState} from 'react';
 import {Appearance} from 'react-native';
 import {dark, light, Theme} from './theme';
 
-const BoldText = styled.Text`
-  font-weight: 600;
-`;
-
 const queryClient = new QueryClient();
 
 const App = () => {
@@ -28,11 +24,26 @@ const App = () => {
 
   const styledTheme: Theme = appTheme === 'dark' ? dark : light;
 
+  const customDefaultTheme = {
+    ...DefaultTheme,
+    colors: {
+      ...DefaultTheme.colors,
+      primary: '#03CF5D',
+    },
+  };
+  const customDarkTheme = {
+    ...DarkTheme,
+    colors: {
+      ...DarkTheme.colors,
+      primary: '#03CF5D',
+    },
+  };
+
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={styledTheme}>
         <NavigationContainer
-          theme={appTheme === 'dark' ? DarkTheme : DefaultTheme}>
+          theme={appTheme === 'dark' ? customDarkTheme : customDefaultTheme}>
           <RootNav />
         </NavigationContainer>
       </ThemeProvider>

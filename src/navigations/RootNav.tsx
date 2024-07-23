@@ -1,9 +1,10 @@
 import {createStackNavigator} from '@react-navigation/stack';
 import Home from '../screens/Home';
 import Detail from '../screens/Detail';
+import {Tabs} from './Tabs';
 
 export type RootNavParamList = {
-  home: undefined;
+  Tab: undefined;
   detail: {id: number};
 };
 
@@ -13,8 +14,8 @@ const RootNav = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="home"
-        component={Home}
+        name="Tab"
+        component={Tabs}
         options={{headerShown: false}}
       />
       <Stack.Screen

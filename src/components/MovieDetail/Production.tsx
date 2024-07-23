@@ -6,6 +6,7 @@ import {useColorScheme} from 'react-native';
 const FlatList = styled.FlatList`` as unknown as typeof RNFlatList;
 const Container = styled.View`
   padding: 10px;
+  border: 1px solid ${props => props.theme.lightNeutralBg};
 `;
 const ItemContainer = styled.TouchableOpacity`
   width: 150px;

@@ -5,6 +5,7 @@ import {CrewType} from '../../types/types';
 const Container = styled.View`
   flex-direction: row;
   padding: 10px;
+  border: 1px solid ${props => props.theme.lightNeutralBg};
 `;
 const PosterImage = styled.Image`
   width: 100px;
