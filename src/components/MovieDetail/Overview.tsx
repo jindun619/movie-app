@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import {BlockTitle} from '../BlockTitle';
 
 const Container = styled.View`
   padding: 15px;
@@ -9,13 +10,6 @@ const Tagline = styled.Text`
   font-weight: 400;
   color: ${props => props.theme.neutralText};
   font-style: italic;
-`;
-
-const Title = styled.Text`
-  margin-top: 5px;
-  font-size: 20px;
-  font-weight: 500;
-  color: ${props => props.theme.mainText};
 `;
 const Content = styled.Text`
   margin-top: 5px;
@@ -33,7 +27,7 @@ const Overview = ({tagline, overview}: OverviewProps) => {
     return (
       <Container>
         <Tagline>{tagline}</Tagline>
-        <Title>개요</Title>
+        <BlockTitle name="개요" />
         <Content>{overview}</Content>
       </Container>
     );

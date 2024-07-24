@@ -1,17 +1,11 @@
-import {Text} from 'react-native';
 import styled from 'styled-components/native';
 import {RecommType} from '../../types/types';
 import {SimpleMovieList} from '../SimpleMovieList';
+import {BlockTitle} from '../BlockTitle';
 
 const Container = styled.View`
   padding: 10px;
   border: 1px solid ${props => props.theme.lightNeutralBg};
-`;
-const Title = styled.Text`
-  font-size: 20px;
-  font-weight: 600;
-  color: ${props => props.theme.mainText};
-  margin: 5px 0;
 `;
 
 interface RecommProps {
@@ -22,7 +16,7 @@ const Recomm = ({data}: RecommProps) => {
 
   return (
     <Container>
-      <Title>당신이 좋아할만한 영화들</Title>
+      <BlockTitle name="당신이 좋아할만한 영화들" />
       <SimpleMovieList data={recommData} />
     </Container>
   );

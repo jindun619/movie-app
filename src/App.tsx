@@ -8,7 +8,7 @@ import {RootNav} from './navigations/RootNav';
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import {useEffect, useState} from 'react';
 import {Appearance} from 'react-native';
-import {dark, light, Theme} from './theme';
+import {dark, light, Theme} from './utils/theme';
 
 const queryClient = new QueryClient();
 

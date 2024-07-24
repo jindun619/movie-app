@@ -15,7 +15,7 @@ export const light: Theme = {
   lightNeutralBg: '#F8F8F8',
   mainText: '#000000',
   neutralText: '#888888',
-  defaultBtn: '#007AFF',
+  defaultBtn: '#03CF5D',
 };
 
 export const dark: Theme = {
@@ -25,5 +25,5 @@ export const dark: Theme = {
   lightNeutralBg: '#111111',
   mainText: '#ffffff',
   neutralText: '#777777',
-  defaultBtn: '#007AFF',
+  defaultBtn: '#03CF5D',
 };

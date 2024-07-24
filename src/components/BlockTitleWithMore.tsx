@@ -9,7 +9,7 @@ const Title = styled.Text`
   font-size: 20px;
   font-weight: 600;
   color: ${props => props.theme.mainText};
-  margin: 5px 0;
+  margin: 10px 0;
 `;
 const ChevronIcon = styled(Icon)`
   color: ${props => props.theme.neutralText};
@@ -18,7 +18,7 @@ const ChevronIcon = styled(Icon)`
 interface TitleWithMoreProps {
   title: string;
 }
-const TitleWithMore = ({title}: TitleWithMoreProps) => {
+const BlockTitleWithMore = ({title}: TitleWithMoreProps) => {
   return (
     <Container>
       <Title>{title}</Title>
@@ -27,4 +27,4 @@ const TitleWithMore = ({title}: TitleWithMoreProps) => {
   );
 };
 
-export {TitleWithMore};
+export {BlockTitleWithMore};

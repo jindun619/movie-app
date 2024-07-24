@@ -1,7 +1,7 @@
 import {useQuery} from '@tanstack/react-query';
 import styled from 'styled-components/native';
 // import {fetchCredits, fetchDetail} from '../fetch';
-import {fetchData} from '../fetch';
+import {fetchData} from '../utils/fetch';
 import {RootNavParamList} from '../navigations/RootNav';
 import {StackScreenProps} from '@react-navigation/stack';
 import {

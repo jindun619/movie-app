@@ -2,11 +2,12 @@ import {StackScreenProps} from '@react-navigation/stack';
 import styled from 'styled-components/native';
 import {RootNavParamList} from '../navigations/RootNav';
 import {useQuery} from '@tanstack/react-query';
-import {fetchData} from '../fetch';
-import {useEffect} from 'react';
+import {fetchData} from '../utils/fetch';
 import {PersonInfo} from '../components/PersonDetail/PersonInfo';
 import {PersonDetailType} from '../types/types';
 import {Biography} from '../components/PersonDetail/Biography';
+import {MovieCredits} from '../components/PersonDetail/MovieCredits';
+import {View} from 'react-native';
 
 const Container = styled.View`
   flex: 1;
@@ -14,7 +15,7 @@ const Container = styled.View`
   align-items: center;
   background-color: ${props => props.theme.mainBg};
 `;
-const ScrollView = styled.ScrollView`
+const FlatList = styled.FlatList`
   width: 100%;
   padding-top: 10px;
 `;
@@ -31,22 +32,35 @@ const Person = ({route, navigation}: PersonScreenProps) => {
     queryKey: ['person', 'detail', id],
     queryFn: () => fetchData.person.detail(id),
   });
-
-  useEffect(() => {
-    console.log(personDetailData);
-  }, [personDetailLoading]);
+  const {
+    data: personMovieCreditsData,
+    isLoading: personMovieCreditsLoading,
+    error: personMovieCreditsError,
+  } = useQuery({
+    queryKey: ['person', 'movieCredits', id],
+    queryFn: () => fetchData.person.movieCredits(id),
+  });
 
   return (
     <Container>
-      <ScrollView>
-        {personDetailData && <PersonInfo data={personDetailData} />}
-        {personDetailData && (
-          <Biography
-            content={personDetailData.biography}
-            name={personDetailData.name}
-          />
-        )}
-      </ScrollView>
+      <FlatList
+        data={[]}
+        renderItem={null}
+        ListEmptyComponent={
+          <>
+            {personDetailData && <PersonInfo data={personDetailData} />}
+            {personDetailData && (
+              <Biography
+                content={personDetailData.biography}
+                name={personDetailData.name}
+              />
+            )}
+            {personMovieCreditsData && (
+              <MovieCredits data={personMovieCreditsData} />
+            )}
+          </>
+        }
+      />
     </Container>
   );
 };

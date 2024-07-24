@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 import {CastType, MovieCreditsType} from '../../types/types';
 import {FlatList as RNFlatList} from 'react-native-gesture-handler';
-import {TitleWithMore} from '../TitleWithMore';
+import {BlockTitleWithMore} from '../BlockTitleWithMore';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootNavParamList} from '../../navigations/RootNav';
@@ -45,7 +45,7 @@ const Credits = ({data}: CreditsProps) => {
   const renderItem = ({item}: {item: CastType}) => (
     <ProfileImageContainer
       onPress={() => {
-        navigation.navigate('Person', {id: item.id});
+        navigation.push('Person', {id: item.id});
       }}>
       <ProfileImage
         source={{
@@ -59,7 +59,7 @@ const Credits = ({data}: CreditsProps) => {
 
   return (
     <Container>
-      <TitleWithMore title="출연진" />
+      <BlockTitleWithMore title="출연진" />
       <FlatList
         horizontal
         showsHorizontalScrollIndicator={false}

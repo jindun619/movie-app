@@ -2,8 +2,9 @@ import {ListRenderItem, FlatList as RNFlatList} from 'react-native';
 import styled from 'styled-components/native';
 import {MovieType} from '../types/types';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {NavigationProp, useNavigation} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import {RootNavParamList} from '../navigations/RootNav';
+import {StackNavigationProp} from '@react-navigation/stack';
 
 const FlatList = styled.FlatList`` as typeof RNFlatList;
 const Poster = styled.TouchableOpacity`
@@ -37,10 +38,10 @@ interface SimpleMovieListProps {
   data: MovieType[];
 }
 const SimpleMovieList = ({data}: SimpleMovieListProps) => {
-  const navigation = useNavigation<NavigationProp<RootNavParamList>>();
+  const navigation = useNavigation<StackNavigationProp<RootNavParamList>>();
 
   const renderItem: ListRenderItem<MovieType> = ({item}) => (
-    <Poster onPress={() => navigation.navigate('Detail', {id: item.id})}>
+    <Poster onPress={() => navigation.push('Detail', {id: item.id})}>
       <Image
         source={{uri: `https://image.tmdb.org/t/p/w500/${item.poster_path}`}}
       />

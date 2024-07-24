@@ -127,7 +127,7 @@ const MovieInfo = ({
           <DirectorText>감독 </DirectorText>
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate('Person', {id: directorId});
+              navigation.push('Person', {id: directorId});
             }}>
             <DirectorNameText>{directorName}</DirectorNameText>
           </TouchableOpacity>

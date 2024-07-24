@@ -1,6 +1,6 @@
 import {FlatList as RNFlatList} from 'react-native';
 import styled from 'styled-components/native';
-import {TitleWithMore} from '../TitleWithMore';
+import {BlockTitleWithMore} from '../BlockTitleWithMore';
 import {MovieVideosType, MovieVideoType} from '../../types/types';
 import YoutubePlayer from 'react-native-youtube-iframe';
 
@@ -20,7 +20,7 @@ const Videos = ({data}: VideosProps) => {
   if (data.results.length > 0) {
     return (
       <Container>
-        <TitleWithMore title="동영상" />
+        <BlockTitleWithMore title="동영상" />
         <FlatList
           horizontal
           showsHorizontalScrollIndicator={false}

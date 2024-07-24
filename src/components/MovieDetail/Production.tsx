@@ -2,6 +2,7 @@ import {FlatList as RNFlatList} from 'react-native';
 import styled from 'styled-components/native';
 import {MovieDetailType, ProductionCompanyType} from '../../types/types';
 import {useColorScheme} from 'react-native';
+import {BlockTitle} from '../BlockTitle';
 
 const FlatList = styled.FlatList`` as unknown as typeof RNFlatList;
 const Container = styled.View`
@@ -10,12 +11,6 @@ const Container = styled.View`
 `;
 const ItemContainer = styled.TouchableOpacity`
   width: 150px;
-`;
-const Title = styled.Text`
-  font-size: 20px;
-  font-weight: 600;
-  color: ${props => props.theme.mainText};
-  margin: 5px 0;
 `;
 const ImageContainer = styled.View`
   justify-content: center;
@@ -62,7 +57,7 @@ const Production = ({data}: ProductionProps) => {
   if (data.production_companies.length > 0) {
     return (
       <Container>
-        <Title>제작사</Title>
+        <BlockTitle name="제작사" />
         <FlatList
           horizontal
           showsHorizontalScrollIndicator={false}

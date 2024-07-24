@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 import {useQuery} from '@tanstack/react-query';
-import {fetchData} from '../fetch';
+import {fetchData} from '../utils/fetch';
 import {SimpleMovieList} from '../components/SimpleMovieList';
 import {ListBlock} from '../components/ListBlock';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -15,7 +15,6 @@ const Container = styled.View`
 `;
 const ScrollView = styled.ScrollView`
   padding: 0 10px;
-  padding-top: 30px;
 `;
 
 type HomeScreenNavigationProp = StackNavigationProp<RootNavParamList, 'Tab'>;
