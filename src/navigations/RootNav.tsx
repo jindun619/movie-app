@@ -7,6 +7,7 @@ export type RootNavParamList = {
   Tab: undefined;
   Detail: {id: number};
   Person: {id: number};
+  SearchResult: undefined;
 };
 
 const Stack = createStackNavigator<RootNavParamList>();
