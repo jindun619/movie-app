@@ -2,19 +2,17 @@ import styled, {useTheme} from 'styled-components/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootNavParamList} from '../navigations/RootNav';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {useEffect, useState} from 'react';
-import {useQuery} from '@tanstack/react-query';
-import {fetchData} from '../utils/fetch';
+import {useState} from 'react';
 import {SearchTypeBtn} from '../components/Search/SearchTypeBtns';
 import {MovieResult} from '../components/Search/MovieResult';
+import {PersonResult} from '../components/Search/PersonResult';
 
 const Container = styled.View`
   flex: 1;
   background-color: ${props => props.theme.mainBg};
+  padding: 10px;
 `;
-const FlatList = styled.FlatList`
-  padding: 0 10px;
-`;
+const FlatList = styled.FlatList``;
 const SearchBarContainer = styled.View`
   flex-direction: row;
   align-items: center;
@@ -50,63 +48,46 @@ const Search = ({navigation}: HomeProps) => {
   const theme = useTheme();
 
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [submittedSearchQuery, setSubmittedSearchQuery] = useState<string>('');
   const [searchType, setSearchType] = useState(0);
-
-  // const {
-  //   data: movieData,
-  //   isLoading: movieLoading,
-  //   error: movieError,
-  // } = useQuery({
-  //   queryKey: ['search', 'movie', submittedSearchQuery],
-  //   queryFn: () => fetchData.search.movie(submittedSearchQuery),
-  // });
-  const {
-    data: personData,
-    isLoading: personLoading,
-    error: personError,
-  } = useQuery({
-    queryKey: ['search', 'person', submittedSearchQuery],
-    queryFn: () => fetchData.search.person(submittedSearchQuery),
-  });
-
-  // useEffect(() => {
-  //   console.log(personData);
-  // }, [personData]);
 
   return (
     <Container>
+      <SearchBarContainer>
+        <SearchBtn>
+          <SearchIcon name="search" size={18} />
+        </SearchBtn>
+        <SearchBarInput
+          placeholder="영화, 사람 등"
+          selectionColor={theme.mainTheme}
+          onChangeText={newText => setSearchQuery(newText)}
+          defaultValue={searchQuery}
+          returnKeyType="search"
+        />
+      </SearchBarContainer>
+      <SearchTypesContainer>
+        <SearchTypeBtn
+          name="영화"
+          isActive={searchType === 0}
+          onPress={() => setSearchType(0)}
+        />
+        <SearchTypeBtn
+          name="인물"
+          isActive={searchType === 1}
+          onPress={() => setSearchType(1)}
+        />
+      </SearchTypesContainer>
       <FlatList
         data={[]}
         renderItem={null}
         ListEmptyComponent={
           <>
-            <SearchBarContainer>
-              <SearchBtn>
-                <SearchIcon name="search" size={18} />
-              </SearchBtn>
-              <SearchBarInput
-                placeholder="영화, 사람 등"
-                selectionColor={theme.mainTheme}
-                onChangeText={newText => setSearchQuery(newText)}
-                defaultValue={searchQuery}
-                returnKeyType="search"
-                onSubmitEditing={() => setSubmittedSearchQuery(searchQuery)}
-              />
-            </SearchBarContainer>
-            <SearchTypesContainer>
-              <SearchTypeBtn
-                name="영화"
-                isActive={searchType === 0}
-                onPress={() => setSearchType(0)}
-              />
-              <SearchTypeBtn
-                name="인물"
-                isActive={searchType === 1}
-                onPress={() => setSearchType(1)}
-              />
-            </SearchTypesContainer>
-            {searchQuery && <MovieResult searchQuery={searchQuery} />}
+            {searchType === 0 ? (
+              <MovieResult searchQuery={searchQuery} />
+            ) : searchType === 1 ? (
+              <PersonResult searchQuery={searchQuery} />
+            ) : (
+              ''
+            )}
           </>
         }
       />

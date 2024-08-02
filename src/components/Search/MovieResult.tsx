@@ -1,12 +1,11 @@
-import {FlatList as RNFlatList, Text} from 'react-native';
+import {ActivityIndicator, FlatList as RNFlatList} from 'react-native';
 import styled from 'styled-components/native';
 import {MovieType} from '../../types/types';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootNavParamList} from '../../navigations/RootNav';
-import {useQuery} from '@tanstack/react-query';
+import {useInfiniteQuery} from '@tanstack/react-query';
 import {fetchData} from '../../utils/fetch';
-import {useState} from 'react';
 
 const FlatList = styled.FlatList`` as unknown as typeof RNFlatList;
 const Separator = styled.View`
@@ -36,8 +35,13 @@ const ReleastDate = styled.Text`
   color: ${props => props.theme.neutralText};
   margin-top: 5px;
 `;
-const PageBtn = styled.Button``;
 
+interface MovieDataType {
+  page: number;
+  results: MovieType[];
+  total_pages: number;
+  total_results: number;
+}
 interface MovieResultProps {
   searchQuery: string;
 }
@@ -45,15 +49,20 @@ const MovieResult = ({searchQuery}: MovieResultProps) => {
   const navigation =
     useNavigation<StackNavigationProp<RootNavParamList, 'Tab'>>();
 
-  const [pageNum, setPageNum] = useState<number>(1);
-
   const {
     data: movieData,
-    isLoading: movieLoading,
-    error: movieError,
-  } = useQuery({
-    queryKey: ['search', 'movie', searchQuery, pageNum],
-    queryFn: () => fetchData.search.movie(searchQuery, pageNum),
+    hasNextPage,
+    fetchNextPage,
+    isFetchingNextPage,
+  } = useInfiniteQuery<MovieDataType>({
+    queryKey: ['search', 'movie', searchQuery],
+    queryFn: ({pageParam = 1}) =>
+      fetchData.search.movie(searchQuery, pageParam as number),
+    initialPageParam: 1,
+    getNextPageParam: lastPage => {
+      if (lastPage.page < lastPage.total_pages) return lastPage.page + 1;
+      return undefined;
+    },
   });
 
   const renderItem = ({item}: {item: MovieType}) => (
@@ -70,15 +79,21 @@ const MovieResult = ({searchQuery}: MovieResultProps) => {
   );
 
   return (
-    <>
-      <FlatList
-        data={movieData?.results}
-        renderItem={renderItem}
-        ItemSeparatorComponent={Separator}
-      />
-      <PageBtn title="1" onPress={() => setPageNum(1)} />
-      <PageBtn title="2" onPress={() => setPageNum(2)} />
-    </>
+    <FlatList
+      keyExtractor={item => item.id.toString()}
+      data={movieData?.pages.flatMap(page => page.results) || []}
+      renderItem={renderItem}
+      ItemSeparatorComponent={Separator}
+      onEndReached={() => {
+        if (hasNextPage) {
+          fetchNextPage();
+        }
+      }}
+      onEndReachedThreshold={0.25}
+      ListFooterComponent={() =>
+        isFetchingNextPage ? <ActivityIndicator size="small" /> : null
+      }
+    />
   );
 };
 
