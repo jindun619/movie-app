@@ -22,7 +22,6 @@ const Name = styled.Text`
 `;
 const SpecsContainer = styled.View`
   flex-direction: row;
-  align-items: center;
   margin-bottom: 3px;
 `;
 const Label = styled.Text`

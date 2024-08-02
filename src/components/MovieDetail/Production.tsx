@@ -9,7 +9,7 @@ const Container = styled.View`
   padding: 10px;
   border: 1px solid ${props => props.theme.lightNeutralBg};
 `;
-const ItemContainer = styled.TouchableOpacity`
+const ItemContainer = styled.View`
   width: 150px;
 `;
 const ImageContainer = styled.View`

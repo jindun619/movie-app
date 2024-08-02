@@ -7,7 +7,6 @@ import {StackScreenProps} from '@react-navigation/stack';
 import {
   MovieCreditsType,
   MovieDetailType,
-  MovieType,
   MovieVideosType,
   RecommType,
 } from '../types/types';
