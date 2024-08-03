@@ -1,5 +1,7 @@
 import styled from 'styled-components/native';
 import {PersonDetailType} from '../../types/types';
+import {useState} from 'react';
+import {Loading} from '../Loading';
 
 const Container = styled.View`
   flex-direction: row;
@@ -41,13 +43,25 @@ interface PersonInfoProps {
   data: PersonDetailType;
 }
 const PersonInfo = ({data}: PersonInfoProps) => {
+  const [imageLoading, setImageLoading] = useState(true);
+  const [imageError, setImageError] = useState(false);
+
   return (
     <Container>
-      <ProfileImage
-        source={{
-          uri: `https://image.tmdb.org/t/p/w500${data.profile_path}`,
-        }}
-      />
+      {imageError || !data.profile_path ? (
+        <ProfileImage source={require('../../assets/no-image.png')} />
+      ) : imageLoading ? (
+        <Loading />
+      ) : (
+        <ProfileImage
+          source={{
+            uri: `https://image.tmdb.org/t/p/w500${data.profile_path}`,
+          }}
+          onLoadStart={() => setImageLoading(true)}
+          onLoadEnd={() => setImageLoading(false)}
+          onError={() => setImageError(true)}
+        />
+      )}
       <Info>
         <Name>{data.name}</Name>
         <SpecsContainer>

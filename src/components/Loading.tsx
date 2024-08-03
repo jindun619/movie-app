@@ -10,7 +10,7 @@ const ActivityIndicator = styled.ActivityIndicator``;
 const Loading = () => {
   return (
     <Container>
-      <ActivityIndicator size="large" />
+      <ActivityIndicator size="small" />
     </Container>
   );
 };
