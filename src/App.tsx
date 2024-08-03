@@ -1,14 +1,14 @@
-import {ThemeProvider} from 'styled-components/native';
+import { ThemeProvider } from 'styled-components/native';
 import {
   DarkTheme,
   DefaultTheme,
   NavigationContainer,
 } from '@react-navigation/native';
-import {RootNav} from './navigations/RootNav';
-import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
-import {useEffect, useState} from 'react';
-import {Appearance} from 'react-native';
-import {dark, light, Theme} from './utils/theme';
+import { RootNav } from './navigations/RootNav';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { useEffect, useState } from 'react';
+import { Appearance } from 'react-native';
+import { dark, light, Theme } from './utils/theme';
 
 const queryClient = new QueryClient();
 

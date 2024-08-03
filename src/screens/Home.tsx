@@ -1,10 +1,10 @@
 import styled from 'styled-components/native';
-import {useQuery} from '@tanstack/react-query';
-import {fetchData} from '../utils/fetch';
-import {SimpleMovieList} from '../components/SimpleMovieList';
-import {ListBlock} from '../components/ListBlock';
-import {SimplePeopleList} from '../components/SimplePeopleList';
-import {Loading} from '../components/Loading';
+import { useQuery } from '@tanstack/react-query';
+import { fetchData } from '../utils/fetch';
+import { SimpleMovieList } from '../components/SimpleMovieList';
+import { ListBlock } from '../components/ListBlock';
+import { SimplePeopleList } from '../components/SimplePeopleList';
+import { Loading } from '../components/Loading';
 
 const Container = styled.View`
   flex: 1;
@@ -17,21 +17,22 @@ const ScrollView = styled.ScrollView`
 `;
 
 const Home = () => {
-  const {data: nowPlayingMoviesData, isLoading: nowPlayingMoviesLoading} =
+  const { data: nowPlayingMoviesData, isLoading: nowPlayingMoviesLoading } =
     useQuery({
       queryKey: ['movieList', 'nowPlaying'],
       queryFn: () => fetchData.movieList.nowPlaying(),
     });
-  const {data: popularMoviesData, isLoading: popularMoviesLoading} = useQuery({
-    queryKey: ['movieList', 'popular'],
-    queryFn: () => fetchData.movieList.popular(),
-  });
-  const {data: topRatedMoviesData, isLoading: topRatedMoviesLoading} = useQuery(
+  const { data: popularMoviesData, isLoading: popularMoviesLoading } = useQuery(
     {
-      queryKey: ['movieList', 'topRated'],
-      queryFn: () => fetchData.movieList.topRated(),
+      queryKey: ['movieList', 'popular'],
+      queryFn: () => fetchData.movieList.popular(),
     },
   );
+  const { data: topRatedMoviesData, isLoading: topRatedMoviesLoading } =
+    useQuery({
+      queryKey: ['movieList', 'topRated'],
+      queryFn: () => fetchData.movieList.topRated(),
+    });
   const {
     data: popularPeopleData,
     isLoading: popularPeopleLoading,

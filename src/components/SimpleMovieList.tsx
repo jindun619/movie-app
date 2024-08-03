@@ -1,10 +1,10 @@
-import {ListRenderItem, FlatList as RNFlatList} from 'react-native';
+import { ListRenderItem, FlatList as RNFlatList } from 'react-native';
 import styled from 'styled-components/native';
-import {MovieType} from '../types/types';
+import { MovieType } from '../types/types';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {useNavigation} from '@react-navigation/native';
-import {RootNavParamList} from '../navigations/RootNav';
-import {StackNavigationProp} from '@react-navigation/stack';
+import { useNavigation } from '@react-navigation/native';
+import { RootNavParamList } from '../navigations/RootNav';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 const FlatList = styled.FlatList`` as typeof RNFlatList;
 const Poster = styled.TouchableOpacity`
@@ -37,13 +37,13 @@ const Separator = styled.View`
 interface SimpleMovieListProps {
   data: MovieType[];
 }
-const SimpleMovieList = ({data}: SimpleMovieListProps) => {
+const SimpleMovieList = ({ data }: SimpleMovieListProps) => {
   const navigation = useNavigation<StackNavigationProp<RootNavParamList>>();
 
-  const renderItem: ListRenderItem<MovieType> = ({item}) => (
-    <Poster onPress={() => navigation.push('Detail', {id: item.id})}>
+  const renderItem: ListRenderItem<MovieType> = ({ item }) => (
+    <Poster onPress={() => navigation.push('Detail', { id: item.id })}>
       <Image
-        source={{uri: `https://image.tmdb.org/t/p/w500/${item.poster_path}`}}
+        source={{ uri: `https://image.tmdb.org/t/p/w500/${item.poster_path}` }}
       />
       <Title numberOfLines={1} ellipsizeMode="tail">
         {item.title}
@@ -66,4 +66,4 @@ const SimpleMovieList = ({data}: SimpleMovieListProps) => {
   );
 };
 
-export {SimpleMovieList};
+export { SimpleMovieList };

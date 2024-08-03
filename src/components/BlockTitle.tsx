@@ -10,8 +10,8 @@ const Title = styled.Text`
 interface BlockTitleProps {
   name: string;
 }
-const BlockTitle = ({name}: BlockTitleProps) => {
+const BlockTitle = ({ name }: BlockTitleProps) => {
   return <Title>{name}</Title>;
 };
 
-export {BlockTitle};
+export { BlockTitle };

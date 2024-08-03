@@ -1,10 +1,10 @@
 import styled from 'styled-components/native';
-import {CastType, MovieCreditsType} from '../../types/types';
-import {FlatList as RNFlatList} from 'react-native-gesture-handler';
-import {BlockTitleWithMore} from '../BlockTitleWithMore';
-import {useNavigation} from '@react-navigation/native';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {RootNavParamList} from '../../navigations/RootNav';
+import { CastType, MovieCreditsType } from '../../types/types';
+import { FlatList as RNFlatList } from 'react-native-gesture-handler';
+import { BlockTitleWithMore } from '../BlockTitleWithMore';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootNavParamList } from '../../navigations/RootNav';
 
 const Container = styled.View`
   padding: 10px;
@@ -38,14 +38,14 @@ const CharacterText = styled.Text`
 interface CreditsProps {
   data: MovieCreditsType;
 }
-const Credits = ({data}: CreditsProps) => {
+const Credits = ({ data }: CreditsProps) => {
   const navigation =
     useNavigation<StackNavigationProp<RootNavParamList, 'Detail'>>();
 
-  const renderItem = ({item}: {item: CastType}) => (
+  const renderItem = ({ item }: { item: CastType }) => (
     <ProfileImageContainer
       onPress={() => {
-        navigation.push('Person', {id: item.id});
+        navigation.push('Person', { id: item.id });
       }}>
       <ProfileImage
         source={{
@@ -70,4 +70,4 @@ const Credits = ({data}: CreditsProps) => {
   );
 };
 
-export {Credits};
+export { Credits };

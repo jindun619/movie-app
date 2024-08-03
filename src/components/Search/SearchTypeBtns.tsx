@@ -23,7 +23,7 @@ interface SearchTypeBtnProps {
   isActive: boolean;
   onPress: () => void;
 }
-const SearchTypeBtn = ({name, isActive, onPress}: SearchTypeBtnProps) => {
+const SearchTypeBtn = ({ name, isActive, onPress }: SearchTypeBtnProps) => {
   return (
     <Btn isActive={isActive} onPress={onPress}>
       <BtnText isActive={isActive}>{name}</BtnText>
@@ -31,4 +31,4 @@ const SearchTypeBtn = ({name, isActive, onPress}: SearchTypeBtnProps) => {
   );
 };
 
-export {SearchTypeBtn};
+export { SearchTypeBtn };

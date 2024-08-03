@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
-import {PersonDetailType} from '../../types/types';
-import {useState} from 'react';
+import { PersonDetailType } from '../../types/types';
+import { useState } from 'react';
 
 const Container = styled.View`
   flex-direction: row;
@@ -41,7 +41,7 @@ const Value = styled.Text`
 interface PersonInfoProps {
   data: PersonDetailType;
 }
-const PersonInfo = ({data}: PersonInfoProps) => {
+const PersonInfo = ({ data }: PersonInfoProps) => {
   const [imageError, setImageError] = useState(false);
 
   return (
@@ -83,4 +83,4 @@ const PersonInfo = ({data}: PersonInfoProps) => {
   );
 };
 
-export {PersonInfo};
+export { PersonInfo };

@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import {BlockTitle} from '../BlockTitle';
+import { BlockTitle } from '../BlockTitle';
 
 const Container = styled.View`
   padding: 15px;
@@ -22,7 +22,7 @@ interface OverviewProps {
   tagline: string;
   overview: string;
 }
-const Overview = ({tagline, overview}: OverviewProps) => {
+const Overview = ({ tagline, overview }: OverviewProps) => {
   if (overview) {
     return (
       <Container>
@@ -34,4 +34,4 @@ const Overview = ({tagline, overview}: OverviewProps) => {
   }
 };
 
-export {Overview};
+export { Overview };

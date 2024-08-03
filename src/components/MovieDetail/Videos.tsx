@@ -1,7 +1,7 @@
-import {FlatList as RNFlatList} from 'react-native';
+import { FlatList as RNFlatList } from 'react-native';
 import styled from 'styled-components/native';
-import {BlockTitleWithMore} from '../BlockTitleWithMore';
-import {MovieVideosType, MovieVideoType} from '../../types/types';
+import { BlockTitleWithMore } from '../BlockTitleWithMore';
+import { MovieVideosType, MovieVideoType } from '../../types/types';
 import YoutubePlayer from 'react-native-youtube-iframe';
 
 const Container = styled.View`
@@ -16,7 +16,7 @@ const Separator = styled.View`
 interface VideosProps {
   data: MovieVideosType;
 }
-const Videos = ({data}: VideosProps) => {
+const Videos = ({ data }: VideosProps) => {
   if (data.results.length > 0) {
     return (
       <Container>
@@ -25,7 +25,7 @@ const Videos = ({data}: VideosProps) => {
           horizontal
           showsHorizontalScrollIndicator={false}
           data={data.results}
-          renderItem={({item}: {item: MovieVideoType}) => {
+          renderItem={({ item }: { item: MovieVideoType }) => {
             return (
               <YoutubePlayer videoId={item.key} width={250} height={150} />
             );
@@ -37,4 +37,4 @@ const Videos = ({data}: VideosProps) => {
   }
 };
 
-export {Videos};
+export { Videos };

@@ -22,7 +22,7 @@ interface BlockProps {
   title: string;
   children: React.ReactNode;
 }
-const Block = ({title, children}: BlockProps) => {
+const Block = ({ title, children }: BlockProps) => {
   return (
     <Container>
       <TextContainer>
@@ -34,4 +34,4 @@ const Block = ({title, children}: BlockProps) => {
   );
 };
 
-export {Block};
+export { Block };

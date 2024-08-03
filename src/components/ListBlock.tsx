@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import {BlockTitleWithMore} from './BlockTitleWithMore';
+import { BlockTitleWithMore } from './BlockTitleWithMore';
 
 const Container = styled.View`
   margin-bottom: 30px;
@@ -9,7 +9,7 @@ interface BlockProps {
   title: string;
   children: React.ReactNode;
 }
-const ListBlock = ({title, children}: BlockProps) => {
+const ListBlock = ({ title, children }: BlockProps) => {
   return (
     <Container>
       <BlockTitleWithMore title={title} />
@@ -18,4 +18,4 @@ const ListBlock = ({title, children}: BlockProps) => {
   );
 };
 
-export {ListBlock};
+export { ListBlock };

@@ -1,11 +1,11 @@
-import {ActivityIndicator, FlatList as RNFlatList} from 'react-native';
+import { ActivityIndicator, FlatList as RNFlatList } from 'react-native';
 import styled from 'styled-components/native';
-import {MovieType} from '../../types/types';
-import {useNavigation} from '@react-navigation/native';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {RootNavParamList} from '../../navigations/RootNav';
-import {useInfiniteQuery} from '@tanstack/react-query';
-import {fetchData} from '../../utils/fetch';
+import { MovieType } from '../../types/types';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootNavParamList } from '../../navigations/RootNav';
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { fetchData } from '../../utils/fetch';
 
 const FlatList = styled.FlatList`` as unknown as typeof RNFlatList;
 const Separator = styled.View`
@@ -45,7 +45,7 @@ interface MovieDataType {
 interface MovieResultProps {
   searchQuery: string;
 }
-const MovieResult = ({searchQuery}: MovieResultProps) => {
+const MovieResult = ({ searchQuery }: MovieResultProps) => {
   const navigation =
     useNavigation<StackNavigationProp<RootNavParamList, 'Tab'>>();
 
@@ -56,7 +56,7 @@ const MovieResult = ({searchQuery}: MovieResultProps) => {
     isFetchingNextPage,
   } = useInfiniteQuery<MovieDataType>({
     queryKey: ['search', 'movie', searchQuery],
-    queryFn: ({pageParam = 1}) =>
+    queryFn: ({ pageParam = 1 }) =>
       fetchData.search.movie(searchQuery, pageParam as number),
     initialPageParam: 1,
     getNextPageParam: lastPage => {
@@ -65,10 +65,10 @@ const MovieResult = ({searchQuery}: MovieResultProps) => {
     },
   });
 
-  const renderItem = ({item}: {item: MovieType}) => (
-    <Item onPress={() => navigation.push('Detail', {id: item.id})}>
+  const renderItem = ({ item }: { item: MovieType }) => (
+    <Item onPress={() => navigation.push('Detail', { id: item.id })}>
       <PosterImage
-        source={{uri: `https://image.tmdb.org/t/p/w92${item.poster_path}`}}
+        source={{ uri: `https://image.tmdb.org/t/p/w92${item.poster_path}` }}
       />
       <Info>
         <Title>{item.title}</Title>
@@ -97,4 +97,4 @@ const MovieResult = ({searchQuery}: MovieResultProps) => {
   );
 };
 
-export {MovieResult};
+export { MovieResult };

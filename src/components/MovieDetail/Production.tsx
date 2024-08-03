@@ -1,8 +1,8 @@
-import {FlatList as RNFlatList} from 'react-native';
+import { FlatList as RNFlatList } from 'react-native';
 import styled from 'styled-components/native';
-import {MovieDetailType, ProductionCompanyType} from '../../types/types';
-import {useColorScheme} from 'react-native';
-import {BlockTitle} from '../BlockTitle';
+import { MovieDetailType, ProductionCompanyType } from '../../types/types';
+import { useColorScheme } from 'react-native';
+import { BlockTitle } from '../BlockTitle';
 
 const FlatList = styled.FlatList`` as unknown as typeof RNFlatList;
 const Container = styled.View`
@@ -36,14 +36,14 @@ const Separator = styled.View`
 interface ProductionProps {
   data: MovieDetailType;
 }
-const Production = ({data}: ProductionProps) => {
+const Production = ({ data }: ProductionProps) => {
   const colorScheme = useColorScheme();
 
-  const renderItem = ({item}: {item: ProductionCompanyType}) => (
+  const renderItem = ({ item }: { item: ProductionCompanyType }) => (
     <ItemContainer>
       <ImageContainer>
         <Image
-          source={{uri: `https://image.tmdb.org/t/p/w185${item.logo_path}`}}
+          source={{ uri: `https://image.tmdb.org/t/p/w185${item.logo_path}` }}
           style={{
             tintColor: colorScheme === 'dark' ? 'white' : 'black',
           }}
@@ -70,4 +70,4 @@ const Production = ({data}: ProductionProps) => {
   }
 };
 
-export {Production};
+export { Production };

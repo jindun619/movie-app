@@ -1,9 +1,9 @@
-import {FlatList as RNFlatList} from 'react-native';
+import { FlatList as RNFlatList } from 'react-native';
 import styled from 'styled-components/native';
-import {PersonType} from '../types/types';
-import {useNavigation} from '@react-navigation/native';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {RootNavParamList} from '../navigations/RootNav';
+import { PersonType } from '../types/types';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootNavParamList } from '../navigations/RootNav';
 
 const FlatList = styled.FlatList`` as unknown as typeof RNFlatList;
 const ProfileImageContainer = styled.TouchableOpacity`
@@ -27,13 +27,13 @@ const NameText = styled.Text`
 interface SimplePeopleListProps {
   data: PersonType[];
 }
-const SimplePeopleList = ({data}: SimplePeopleListProps) => {
+const SimplePeopleList = ({ data }: SimplePeopleListProps) => {
   const navigation =
     useNavigation<StackNavigationProp<RootNavParamList, 'Tab'>>();
 
-  const renderItem = ({item}: {item: PersonType}) => (
+  const renderItem = ({ item }: { item: PersonType }) => (
     <ProfileImageContainer
-      onPress={() => navigation.push('Person', {id: item.id})}>
+      onPress={() => navigation.push('Person', { id: item.id })}>
       <ProfileImage
         source={{
           uri: `https://image.tmdb.org/t/p/w185${item.profile_path}`,
@@ -53,4 +53,4 @@ const SimplePeopleList = ({data}: SimplePeopleListProps) => {
   );
 };
 
-export {SimplePeopleList};
+export { SimplePeopleList };

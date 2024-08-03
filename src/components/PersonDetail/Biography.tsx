@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import {BlockTitle} from '../BlockTitle';
+import { BlockTitle } from '../BlockTitle';
 
 const Container = styled.View`
   padding: 30px 10px;
@@ -15,7 +15,7 @@ interface BiographyProps {
   content: string;
   name: string;
 }
-const Biography = ({content, name}: BiographyProps) => {
+const Biography = ({ content, name }: BiographyProps) => {
   return (
     <Container>
       <BlockTitle name="약력" />
@@ -26,4 +26,4 @@ const Biography = ({content, name}: BiographyProps) => {
   );
 };
 
-export {Biography};
+export { Biography };

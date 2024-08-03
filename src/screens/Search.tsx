@@ -1,9 +1,9 @@
-import styled, {useTheme} from 'styled-components/native';
+import styled, { useTheme } from 'styled-components/native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {useState} from 'react';
-import {SearchTypeBtn} from '../components/Search/SearchTypeBtns';
-import {MovieResult} from '../components/Search/MovieResult';
-import {PersonResult} from '../components/Search/PersonResult';
+import { useState } from 'react';
+import { SearchTypeBtn } from '../components/Search/SearchTypeBtns';
+import { MovieResult } from '../components/Search/MovieResult';
+import { PersonResult } from '../components/Search/PersonResult';
 
 const Container = styled.View`
   flex: 1;

@@ -18,7 +18,7 @@ const ChevronIcon = styled(Icon)`
 interface TitleWithMoreProps {
   title: string;
 }
-const BlockTitleWithMore = ({title}: TitleWithMoreProps) => {
+const BlockTitleWithMore = ({ title }: TitleWithMoreProps) => {
   return (
     <Container>
       <Title>{title}</Title>
@@ -27,4 +27,4 @@ const BlockTitleWithMore = ({title}: TitleWithMoreProps) => {
   );
 };
 
-export {BlockTitleWithMore};
+export { BlockTitleWithMore };

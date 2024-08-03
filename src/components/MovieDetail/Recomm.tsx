@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
-import {RecommType} from '../../types/types';
-import {SimpleMovieList} from '../SimpleMovieList';
-import {BlockTitle} from '../BlockTitle';
+import { RecommType } from '../../types/types';
+import { SimpleMovieList } from '../SimpleMovieList';
+import { BlockTitle } from '../BlockTitle';
 
 const Container = styled.View`
   padding: 10px;
@@ -11,7 +11,7 @@ const Container = styled.View`
 interface RecommProps {
   data: RecommType;
 }
-const Recomm = ({data}: RecommProps) => {
+const Recomm = ({ data }: RecommProps) => {
   const recommData = data.results.slice(0, 10);
 
   return (
@@ -22,4 +22,4 @@ const Recomm = ({data}: RecommProps) => {
   );
 };
 
-export {Recomm};
+export { Recomm };

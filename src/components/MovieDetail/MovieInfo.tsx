@@ -1,10 +1,10 @@
 import Icon from 'react-native-vector-icons/Ionicons';
 import styled from 'styled-components/native';
-import {CrewType} from '../../types/types';
-import {useNavigation} from '@react-navigation/native';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {RootNavParamList} from '../../navigations/RootNav';
-import {useState} from 'react';
+import { CrewType } from '../../types/types';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootNavParamList } from '../../navigations/RootNav';
+import { useState } from 'react';
 
 const Container = styled.View`
   flex-direction: row;
@@ -92,7 +92,7 @@ interface MovieInfoProps {
   voteAverage: number;
   voteCount: number;
   runtime: number;
-  genres: {id: number; name: string}[];
+  genres: { id: number; name: string }[];
 }
 const MovieInfo = ({
   posterPath,
@@ -109,8 +109,8 @@ const MovieInfo = ({
 
   const [posterError, setPosterError] = useState(false);
 
-  const directorName = crewData.filter(({job}) => job === 'Director')[0].name;
-  const directorId = crewData.filter(({job}) => job === 'Director')[0].id;
+  const directorName = crewData.filter(({ job }) => job === 'Director')[0].name;
+  const directorId = crewData.filter(({ job }) => job === 'Director')[0].id;
 
   return (
     <Container>
@@ -135,7 +135,7 @@ const MovieInfo = ({
           <DirectorText>감독 </DirectorText>
           <TouchableOpacity
             onPress={() => {
-              navigation.push('Person', {id: directorId});
+              navigation.push('Person', { id: directorId });
             }}>
             <DirectorNameText>{directorName}</DirectorNameText>
           </TouchableOpacity>
@@ -145,7 +145,7 @@ const MovieInfo = ({
           <Rate>{`${Math.round(voteAverage * 10) / 10} (${voteCount})`}</Rate>
         </RateContainer>
         <GenresContainer>
-          {genres.map(({name}) => (
+          {genres.map(({ name }) => (
             <Genre key={name}>{name}</Genre>
           ))}
         </GenresContainer>
@@ -154,4 +154,4 @@ const MovieInfo = ({
   );
 };
 
-export {MovieInfo};
+export { MovieInfo };

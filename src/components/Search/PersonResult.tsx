@@ -1,12 +1,12 @@
-import {ActivityIndicator, FlatList as RNFlatList, Text} from 'react-native';
+import { ActivityIndicator, FlatList as RNFlatList, Text } from 'react-native';
 import styled from 'styled-components/native';
-import {PersonType} from '../../types/types';
-import {useNavigation} from '@react-navigation/native';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {RootNavParamList} from '../../navigations/RootNav';
-import {useInfiniteQuery} from '@tanstack/react-query';
-import {fetchData} from '../../utils/fetch';
-import {translate} from '../../utils/utils';
+import { PersonType } from '../../types/types';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootNavParamList } from '../../navigations/RootNav';
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { fetchData } from '../../utils/fetch';
+import { translate } from '../../utils/utils';
 
 const FlatList = styled.FlatList`` as unknown as typeof RNFlatList;
 const Separator = styled.View`
@@ -52,7 +52,7 @@ interface PersonDataType {
 interface PersonResultProps {
   searchQuery: string;
 }
-const PersonResult = ({searchQuery}: PersonResultProps) => {
+const PersonResult = ({ searchQuery }: PersonResultProps) => {
   const navigation =
     useNavigation<StackNavigationProp<RootNavParamList, 'Tab'>>();
 
@@ -63,7 +63,7 @@ const PersonResult = ({searchQuery}: PersonResultProps) => {
     isFetchingNextPage,
   } = useInfiniteQuery<PersonDataType>({
     queryKey: ['search', 'person', searchQuery],
-    queryFn: ({pageParam = 1}) =>
+    queryFn: ({ pageParam = 1 }) =>
       fetchData.search.person(searchQuery, pageParam as number),
     initialPageParam: 1,
     getNextPageParam: lastPage => {
@@ -72,10 +72,10 @@ const PersonResult = ({searchQuery}: PersonResultProps) => {
     },
   });
 
-  const renderItem = ({item}: {item: PersonType}) => (
-    <Item onPress={() => navigation.push('Person', {id: item.id})}>
+  const renderItem = ({ item }: { item: PersonType }) => (
+    <Item onPress={() => navigation.push('Person', { id: item.id })}>
       <PosterImage
-        source={{uri: `https://image.tmdb.org/t/p/w185${item.profile_path}`}}
+        source={{ uri: `https://image.tmdb.org/t/p/w185${item.profile_path}` }}
       />
       <Info>
         <Name>{item.name}</Name>
@@ -108,4 +108,4 @@ const PersonResult = ({searchQuery}: PersonResultProps) => {
   );
 };
 
-export {PersonResult};
+export { PersonResult };

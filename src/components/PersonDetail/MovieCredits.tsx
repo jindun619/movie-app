@@ -1,4 +1,4 @@
-import {FlatList as RNFlatList} from 'react-native';
+import { FlatList as RNFlatList } from 'react-native';
 import styled from 'styled-components/native';
 import {
   PersonMovieCreditsCastType,
@@ -6,11 +6,11 @@ import {
   PersonMovieCreditsType,
 } from '../../types/types';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {BlockTitle} from '../BlockTitle';
-import {useNavigation} from '@react-navigation/native';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {RootNavParamList} from '../../navigations/RootNav';
-import {translate} from '../../utils/utils';
+import { BlockTitle } from '../BlockTitle';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootNavParamList } from '../../navigations/RootNav';
+import { translate } from '../../utils/utils';
 
 const Container = styled.View`
   padding: 10px;
@@ -52,7 +52,7 @@ const MarginVertical = styled.View`
 interface MovieCreditsProps {
   data: PersonMovieCreditsType;
 }
-const MovieCredits = ({data}: MovieCreditsProps) => {
+const MovieCredits = ({ data }: MovieCreditsProps) => {
   const navigation =
     useNavigation<StackNavigationProp<RootNavParamList, 'Person'>>();
 
@@ -67,7 +67,7 @@ const MovieCredits = ({data}: MovieCreditsProps) => {
   }: {
     item: PersonMovieCreditsCastType | PersonMovieCreditsCrewType;
   }) => (
-    <Item onPress={() => navigation.push('Detail', {id: item.id as number})}>
+    <Item onPress={() => navigation.push('Detail', { id: item.id as number })}>
       <TitleRoleContainer>
         <TitleBtn>
           <TitleText>{item.title}</TitleText>
@@ -107,4 +107,4 @@ const MovieCredits = ({data}: MovieCreditsProps) => {
   );
 };
 
-export {MovieCredits};
+export { MovieCredits };

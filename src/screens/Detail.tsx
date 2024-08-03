@@ -1,22 +1,22 @@
-import {useQuery} from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import styled from 'styled-components/native';
-import {fetchData} from '../utils/fetch';
-import {RootNavParamList} from '../navigations/RootNav';
-import {StackScreenProps} from '@react-navigation/stack';
+import { fetchData } from '../utils/fetch';
+import { RootNavParamList } from '../navigations/RootNav';
+import { StackScreenProps } from '@react-navigation/stack';
 import {
   MovieCreditsType,
   MovieDetailType,
   MovieVideosType,
   RecommType,
 } from '../types/types';
-import {MovieInfo} from '../components/MovieDetail/MovieInfo';
-import {Overview} from '../components/MovieDetail/Overview';
-import {Credits} from '../components/MovieDetail/Credits';
-import {Videos} from '../components/MovieDetail/Videos';
-import {Production} from '../components/MovieDetail/Production';
-import {Recomm} from '../components/MovieDetail/Recomm';
-import {useState} from 'react';
-import {Loading} from '../components/Loading';
+import { MovieInfo } from '../components/MovieDetail/MovieInfo';
+import { Overview } from '../components/MovieDetail/Overview';
+import { Credits } from '../components/MovieDetail/Credits';
+import { Videos } from '../components/MovieDetail/Videos';
+import { Production } from '../components/MovieDetail/Production';
+import { Recomm } from '../components/MovieDetail/Recomm';
+import { useState } from 'react';
+import { Loading } from '../components/Loading';
 
 const Container = styled.View`
   flex: 1;
@@ -34,27 +34,27 @@ const BackdropImage = styled.Image`
 const ScrollViewContent = styled.View``;
 
 type DetailScreenProps = StackScreenProps<RootNavParamList, 'Detail'>;
-const Detail = ({route, navigation}: DetailScreenProps) => {
-  const {id} = route.params;
+const Detail = ({ route, navigation }: DetailScreenProps) => {
+  const { id } = route.params;
 
   const [backdropError, setBackdropError] = useState(false);
 
-  const {data: detailData, isLoading: detailLoading} =
+  const { data: detailData, isLoading: detailLoading } =
     useQuery<MovieDetailType>({
       queryKey: ['detail', id],
       queryFn: () => fetchData.movie.detail(id),
     });
-  const {data: creditsData, isLoading: creditsLoading} =
+  const { data: creditsData, isLoading: creditsLoading } =
     useQuery<MovieCreditsType>({
       queryKey: ['credits', id],
       queryFn: () => fetchData.movie.credits(id),
     });
-  const {data: videosData, isLoading: videosLoading} =
+  const { data: videosData, isLoading: videosLoading } =
     useQuery<MovieVideosType>({
       queryKey: ['video', id],
       queryFn: () => fetchData.movie.videos(id),
     });
-  const {data: recommData, isLoading: recommLoading} = useQuery<RecommType>({
+  const { data: recommData, isLoading: recommLoading } = useQuery<RecommType>({
     queryKey: ['recomm', id],
     queryFn: () => fetchData.movie.recomm(id),
   });
