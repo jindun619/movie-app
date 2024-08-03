@@ -33,6 +33,14 @@ const Person = ({route, navigation}: PersonScreenProps) => {
     queryFn: () => fetchData.person.detail(id),
   });
   const {
+    data: personDetailOriginalData,
+    isLoading: personDetailOriginalLoading,
+    error: personDetailOriginalError,
+  } = useQuery<PersonDetailType>({
+    queryKey: ['person', 'detail', 'original', id],
+    queryFn: () => fetchData.person.detail(id, true),
+  });
+  const {
     data: personMovieCreditsData,
     isLoading: personMovieCreditsLoading,
     error: personMovieCreditsError,
@@ -49,9 +57,12 @@ const Person = ({route, navigation}: PersonScreenProps) => {
         ListEmptyComponent={
           <>
             {personDetailData && <PersonInfo data={personDetailData} />}
-            {personDetailData && (
+            {personDetailData && personDetailOriginalData && (
               <Biography
-                content={personDetailData.biography}
+                content={
+                  personDetailData.biography ||
+                  personDetailOriginalData.biography
+                }
                 name={personDetailData.name}
               />
             )}
