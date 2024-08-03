@@ -3,9 +3,8 @@ import {useQuery} from '@tanstack/react-query';
 import {fetchData} from '../utils/fetch';
 import {SimpleMovieList} from '../components/SimpleMovieList';
 import {ListBlock} from '../components/ListBlock';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {RootNavParamList} from '../navigations/RootNav';
 import {SimplePeopleList} from '../components/SimplePeopleList';
+import {Loading} from '../components/Loading';
 
 const Container = styled.View`
   flex: 1;
@@ -17,36 +16,22 @@ const ScrollView = styled.ScrollView`
   padding: 0 10px;
 `;
 
-type HomeScreenNavigationProp = StackNavigationProp<RootNavParamList, 'Tab'>;
-
-interface HomeProps {
-  navigation: HomeScreenNavigationProp;
-}
-const Home = ({navigation}: HomeProps) => {
-  const {
-    data: nowPlayingMoviesData,
-    isLoading: nowPlayingMoviesLoading,
-    error: nowPlayingMoviesError,
-  } = useQuery({
-    queryKey: ['movieList', 'nowPlaying'],
-    queryFn: () => fetchData.movieList.nowPlaying(),
-  });
-  const {
-    data: popularMoviesData,
-    isLoading: popularMoviesLoading,
-    error: popularMoviesError,
-  } = useQuery({
+const Home = () => {
+  const {data: nowPlayingMoviesData, isLoading: nowPlayingMoviesLoading} =
+    useQuery({
+      queryKey: ['movieList', 'nowPlaying'],
+      queryFn: () => fetchData.movieList.nowPlaying(),
+    });
+  const {data: popularMoviesData, isLoading: popularMoviesLoading} = useQuery({
     queryKey: ['movieList', 'popular'],
     queryFn: () => fetchData.movieList.popular(),
   });
-  const {
-    data: topRatedMoviesData,
-    isLoading: topRatedMoviesLoading,
-    error: topRatedMoviesError,
-  } = useQuery({
-    queryKey: ['movieList', 'topRated'],
-    queryFn: () => fetchData.movieList.topRated(),
-  });
+  const {data: topRatedMoviesData, isLoading: topRatedMoviesLoading} = useQuery(
+    {
+      queryKey: ['movieList', 'topRated'],
+      queryFn: () => fetchData.movieList.topRated(),
+    },
+  );
   const {
     data: popularPeopleData,
     isLoading: popularPeopleLoading,
@@ -59,26 +44,42 @@ const Home = ({navigation}: HomeProps) => {
   return (
     <Container>
       <ScrollView>
-        {!nowPlayingMoviesLoading && nowPlayingMoviesData.results && (
-          <ListBlock title="지금 상영중">
-            <SimpleMovieList data={nowPlayingMoviesData.results} />
-          </ListBlock>
-        )}
-        {!popularMoviesLoading && popularMoviesData.results && (
-          <ListBlock title="인기 영화">
-            <SimpleMovieList data={popularMoviesData.results} />
-          </ListBlock>
-        )}
-        {!topRatedMoviesLoading && topRatedMoviesData.results && (
-          <ListBlock title="평점순">
-            <SimpleMovieList data={topRatedMoviesData.results} />
-          </ListBlock>
-        )}
-        {!popularPeopleLoading && popularPeopleData.results && (
-          <ListBlock title="인기 배우">
-            <SimplePeopleList data={popularPeopleData.results} />
-          </ListBlock>
-        )}
+        <ListBlock title="지금 상영중">
+          {nowPlayingMoviesLoading ? (
+            <Loading />
+          ) : (
+            nowPlayingMoviesData?.results && (
+              <SimpleMovieList data={nowPlayingMoviesData.results} />
+            )
+          )}
+        </ListBlock>
+        <ListBlock title="인기 영화">
+          {popularMoviesLoading ? (
+            <Loading />
+          ) : (
+            popularMoviesData?.results && (
+              <SimpleMovieList data={popularMoviesData.results} />
+            )
+          )}
+        </ListBlock>
+        <ListBlock title="평점순">
+          {topRatedMoviesLoading ? (
+            <Loading />
+          ) : (
+            topRatedMoviesData.results && (
+              <SimpleMovieList data={topRatedMoviesData.results} />
+            )
+          )}
+        </ListBlock>
+        <ListBlock title="인기 배우">
+          {popularPeopleLoading ? (
+            <Loading />
+          ) : (
+            popularPeopleData.results && (
+              <SimplePeopleList data={popularPeopleData.results} />
+            )
+          )}
+        </ListBlock>
       </ScrollView>
     </Container>
   );

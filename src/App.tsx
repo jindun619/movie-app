@@ -1,4 +1,4 @@
-import {styled, ThemeProvider} from 'styled-components/native';
+import {ThemeProvider} from 'styled-components/native';
 import {
   DarkTheme,
   DefaultTheme,

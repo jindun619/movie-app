@@ -1,7 +1,6 @@
 import styled from 'styled-components/native';
 import {PersonDetailType} from '../../types/types';
-import {useEffect, useState} from 'react';
-import {Loading} from '../Loading';
+import {useState} from 'react';
 
 const Container = styled.View`
   flex-direction: row;

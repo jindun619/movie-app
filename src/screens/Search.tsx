@@ -1,6 +1,4 @@
 import styled, {useTheme} from 'styled-components/native';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {RootNavParamList} from '../navigations/RootNav';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useState} from 'react';
 import {SearchTypeBtn} from '../components/Search/SearchTypeBtns';
@@ -39,12 +37,7 @@ const SearchTypesContainer = styled.View`
   flex-direction: row;
 `;
 
-type SearchScreenNavigationProp = StackNavigationProp<RootNavParamList, 'Tab'>;
-
-interface HomeProps {
-  navigation: SearchScreenNavigationProp;
-}
-const Search = ({navigation}: HomeProps) => {
+const Search = () => {
   const theme = useTheme();
 
   const [searchQuery, setSearchQuery] = useState<string>('');

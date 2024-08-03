@@ -7,7 +7,7 @@ import {PersonInfo} from '../components/PersonDetail/PersonInfo';
 import {PersonDetailType} from '../types/types';
 import {Biography} from '../components/PersonDetail/Biography';
 import {MovieCredits} from '../components/PersonDetail/MovieCredits';
-import {View} from 'react-native';
+import {Loading} from '../components/Loading';
 
 const Container = styled.View`
   flex: 1;
@@ -21,33 +21,26 @@ const FlatList = styled.FlatList`
 `;
 
 type PersonScreenProps = StackScreenProps<RootNavParamList, 'Person'>;
-const Person = ({route, navigation}: PersonScreenProps) => {
+const Person = ({route}: PersonScreenProps) => {
   const {id} = route.params;
 
-  const {
-    data: personDetailData,
-    isLoading: personDetailLoading,
-    error: personDetailError,
-  } = useQuery<PersonDetailType>({
-    queryKey: ['person', 'detail', id],
-    queryFn: () => fetchData.person.detail(id),
-  });
+  const {data: personDetailData, isLoading: personDetailLoading} =
+    useQuery<PersonDetailType>({
+      queryKey: ['person', 'detail', id],
+      queryFn: () => fetchData.person.detail(id),
+    });
   const {
     data: personDetailOriginalData,
     isLoading: personDetailOriginalLoading,
-    error: personDetailOriginalError,
   } = useQuery<PersonDetailType>({
     queryKey: ['person', 'detail', 'original', id],
     queryFn: () => fetchData.person.detail(id, true),
   });
-  const {
-    data: personMovieCreditsData,
-    isLoading: personMovieCreditsLoading,
-    error: personMovieCreditsError,
-  } = useQuery({
-    queryKey: ['person', 'movieCredits', id],
-    queryFn: () => fetchData.person.movieCredits(id),
-  });
+  const {data: personMovieCreditsData, isLoading: personMovieCreditsLoading} =
+    useQuery({
+      queryKey: ['person', 'movieCredits', id],
+      queryFn: () => fetchData.person.movieCredits(id),
+    });
 
   return (
     <Container>
@@ -56,18 +49,33 @@ const Person = ({route, navigation}: PersonScreenProps) => {
         renderItem={null}
         ListEmptyComponent={
           <>
-            {personDetailData && <PersonInfo data={personDetailData} />}
-            {personDetailData && personDetailOriginalData && (
-              <Biography
-                content={
-                  personDetailData.biography ||
-                  personDetailOriginalData.biography
-                }
-                name={personDetailData.name}
-              />
+            {personDetailLoading ? (
+              <Loading />
+            ) : (
+              personDetailData && <PersonInfo data={personDetailData} />
             )}
-            {personMovieCreditsData && (
-              <MovieCredits data={personMovieCreditsData} />
+
+            {personDetailLoading || personDetailOriginalLoading ? (
+              <Loading />
+            ) : (
+              personDetailData &&
+              personDetailOriginalData && (
+                <Biography
+                  content={
+                    personDetailData.biography ||
+                    personDetailOriginalData.biography
+                  }
+                  name={personDetailData.name}
+                />
+              )
+            )}
+
+            {personMovieCreditsLoading ? (
+              <Loading />
+            ) : (
+              personMovieCreditsData && (
+                <MovieCredits data={personMovieCreditsData} />
+              )
             )}
           </>
         }

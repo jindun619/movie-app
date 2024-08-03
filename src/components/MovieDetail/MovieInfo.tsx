@@ -4,6 +4,7 @@ import {CrewType} from '../../types/types';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootNavParamList} from '../../navigations/RootNav';
+import {useState} from 'react';
 
 const Container = styled.View`
   flex-direction: row;
@@ -106,16 +107,23 @@ const MovieInfo = ({
 }: MovieInfoProps) => {
   const navigation = useNavigation<StackNavigationProp<RootNavParamList>>();
 
+  const [posterError, setPosterError] = useState(false);
+
   const directorName = crewData.filter(({job}) => job === 'Director')[0].name;
   const directorId = crewData.filter(({job}) => job === 'Director')[0].id;
 
   return (
     <Container>
-      <PosterImage
-        source={{
-          uri: `https://image.tmdb.org/t/p/w500${posterPath}`,
-        }}
-      />
+      {posterError ? (
+        <PosterImage source={require('../../assets/no-image.png')} />
+      ) : (
+        <PosterImage
+          source={{
+            uri: `https://image.tmdb.org/t/p/w500${posterPath}`,
+          }}
+          onError={() => setPosterError(true)}
+        />
+      )}
       <Info>
         <Title>{title}</Title>
         <OriginalTitle>({originalTitle})</OriginalTitle>
