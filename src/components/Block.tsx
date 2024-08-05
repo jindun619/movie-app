@@ -20,15 +20,20 @@ const ChevronIcon = styled(Icon)`
 
 interface BlockProps {
   title: string;
+  moreIcon?: boolean;
   children: React.ReactNode;
 }
-const Block = ({ title, children }: BlockProps) => {
+const Block = ({ title, moreIcon = false, children }: BlockProps) => {
   return (
     <Container>
-      <TextContainer>
+      {moreIcon ? (
+        <TextContainer>
+          <Title>{title}</Title>
+          <ChevronIcon name="chevron-forward-outline" size={24} />
+        </TextContainer>
+      ) : (
         <Title>{title}</Title>
-        <ChevronIcon name="chevron-forward-outline" size={24} />
-      </TextContainer>
+      )}
       {children}
     </Container>
   );

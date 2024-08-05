@@ -2,9 +2,9 @@ import styled from 'styled-components/native';
 import { useQuery } from '@tanstack/react-query';
 import { fetchData } from '../utils/fetch';
 import { SimpleMovieList } from '../components/SimpleMovieList';
-import { ListBlock } from '../components/ListBlock';
 import { SimplePeopleList } from '../components/SimplePeopleList';
 import { Loading } from '../components/Loading';
+import { Block } from '../components/Block';
 
 const Container = styled.View`
   flex: 1;
@@ -33,19 +33,17 @@ const Home = () => {
       queryKey: ['movieList', 'topRated'],
       queryFn: () => fetchData.movieList.topRated(),
     });
-  const {
-    data: popularPeopleData,
-    isLoading: popularPeopleLoading,
-    error: popularPeopleError,
-  } = useQuery({
-    queryKey: ['peopleList', 'popular'],
-    queryFn: () => fetchData.peopleList.popular(),
-  });
+  const { data: popularPeopleData, isLoading: popularPeopleLoading } = useQuery(
+    {
+      queryKey: ['peopleList', 'popular'],
+      queryFn: () => fetchData.peopleList.popular(),
+    },
+  );
 
   return (
     <Container>
       <ScrollView>
-        <ListBlock title="지금 상영중">
+        <Block title="지금 상영중">
           {nowPlayingMoviesLoading ? (
             <Loading />
           ) : (
@@ -53,8 +51,8 @@ const Home = () => {
               <SimpleMovieList data={nowPlayingMoviesData.results} />
             )
           )}
-        </ListBlock>
-        <ListBlock title="인기 영화">
+        </Block>
+        <Block title="인기 영화">
           {popularMoviesLoading ? (
             <Loading />
           ) : (
@@ -62,8 +60,8 @@ const Home = () => {
               <SimpleMovieList data={popularMoviesData.results} />
             )
           )}
-        </ListBlock>
-        <ListBlock title="평점순">
+        </Block>
+        <Block title="평점순">
           {topRatedMoviesLoading ? (
             <Loading />
           ) : (
@@ -71,8 +69,8 @@ const Home = () => {
               <SimpleMovieList data={topRatedMoviesData.results} />
             )
           )}
-        </ListBlock>
-        <ListBlock title="인기 배우">
+        </Block>
+        <Block title="인기 배우">
           {popularPeopleLoading ? (
             <Loading />
           ) : (
@@ -80,7 +78,7 @@ const Home = () => {
               <SimplePeopleList data={popularPeopleData.results} />
             )
           )}
-        </ListBlock>
+        </Block>
       </ScrollView>
     </Container>
   );
