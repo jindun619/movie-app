@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
 import { PersonDetailType } from '../../types/types';
 import { useState } from 'react';
+import { translate } from '../../utils/utils';
 
 const Container = styled.View`
   flex-direction: row;
@@ -23,6 +24,7 @@ const Name = styled.Text`
 `;
 const SpecsContainer = styled.View`
   flex-direction: row;
+  align-items: center;
   margin-bottom: 3px;
 `;
 const Label = styled.Text`
@@ -62,7 +64,9 @@ const PersonInfo = ({ data }: PersonInfoProps) => {
         <Name>{data.name}</Name>
         <SpecsContainer>
           <Label>전문분야:</Label>
-          <Value>{data.known_for_department ?? '-'}</Value>
+          <Value>
+            {translate.department(data.known_for_department) ?? '-'}
+          </Value>
         </SpecsContainer>
         <SpecsContainer>
           <Label>성별:</Label>
