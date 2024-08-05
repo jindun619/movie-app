@@ -17,10 +17,11 @@ const ChevronIcon = styled(Icon)`
 
 interface TitleWithMoreProps {
   title: string;
+  onPress: () => void;
 }
-const BlockTitleWithMore = ({ title }: TitleWithMoreProps) => {
+const BlockTitleWithMore = ({ title, onPress }: TitleWithMoreProps) => {
   return (
-    <Container>
+    <Container onPress={onPress}>
       <Title>{title}</Title>
       <ChevronIcon name="chevron-forward-outline" size={24} />
     </Container>

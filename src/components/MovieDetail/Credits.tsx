@@ -59,7 +59,10 @@ const Credits = ({ data }: CreditsProps) => {
 
   return (
     <Container>
-      <BlockTitleWithMore title="출연진" />
+      <BlockTitleWithMore
+        title="출연진"
+        onPress={() => navigation.push('CreditsDetail', { data })}
+      />
       <FlatList
         horizontal
         showsHorizontalScrollIndicator={false}

@@ -2,12 +2,15 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Detail from '../screens/Detail';
 import { Tabs } from './Tabs';
 import { Person } from '../screens/Person';
+import { CreditsDetail } from '../screens/CreditsDetail';
+import { MovieCreditsType } from '../types/types';
 
 export type RootNavParamList = {
   Tab: undefined;
   Detail: { id: number };
   Person: { id: number };
   SearchResult: undefined;
+  CreditsDetail: { data: MovieCreditsType };
 };
 
 const Stack = createStackNavigator<RootNavParamList>();
@@ -32,6 +35,11 @@ const RootNav = () => {
         name="Person"
         component={Person}
         options={{ headerTitle: '인물 정보' }}
+      />
+      <Stack.Screen
+        name="CreditsDetail"
+        component={CreditsDetail}
+        options={{ headerTitle: '출연진' }}
       />
     </Stack.Navigator>
   );

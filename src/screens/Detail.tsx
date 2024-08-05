@@ -34,7 +34,7 @@ const BackdropImage = styled.Image`
 const ScrollViewContent = styled.View``;
 
 type DetailScreenProps = StackScreenProps<RootNavParamList, 'Detail'>;
-const Detail = ({ route, navigation }: DetailScreenProps) => {
+const Detail = ({ route }: DetailScreenProps) => {
   const { id } = route.params;
 
   const [backdropError, setBackdropError] = useState(false);
