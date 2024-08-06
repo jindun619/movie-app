@@ -88,21 +88,29 @@ const MovieCredits = ({ data }: MovieCreditsProps) => {
 
   return (
     <Container>
-      <BlockTitle name="출연" />
-      <FlatList
-        data={data.cast}
-        renderItem={renderItem}
-        keyExtractor={keyExtractor}
-        ItemSeparatorComponent={Separator}
-      />
+      {data.cast.length > 0 && (
+        <>
+          <BlockTitle name="출연" />
+          <FlatList
+            data={data.cast}
+            renderItem={renderItem}
+            keyExtractor={keyExtractor}
+            ItemSeparatorComponent={Separator}
+          />
+        </>
+      )}
       <MarginVertical></MarginVertical>
-      <BlockTitle name="제작" />
-      <FlatList
-        data={data.crew}
-        renderItem={renderItem}
-        keyExtractor={keyExtractor}
-        ItemSeparatorComponent={Separator}
-      />
+      {data.crew.length > 0 && (
+        <>
+          <BlockTitle name="제작" />
+          <FlatList
+            data={data.crew}
+            renderItem={renderItem}
+            keyExtractor={keyExtractor}
+            ItemSeparatorComponent={Separator}
+          />
+        </>
+      )}
     </Container>
   );
 };

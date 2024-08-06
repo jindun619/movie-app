@@ -1,6 +1,6 @@
 import styled, { useTheme } from 'styled-components/native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SearchTypeBtn } from '../components/Search/SearchTypeBtns';
 import { MovieResult } from '../components/Search/MovieResult';
 import { PersonResult } from '../components/Search/PersonResult';
@@ -43,6 +43,10 @@ const Search = () => {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [searchType, setSearchType] = useState(0);
 
+  useEffect(() => {
+    setSearchQuery('');
+  }, [searchType]);
+
   return (
     <Container>
       <SearchBarContainer>
@@ -70,6 +74,7 @@ const Search = () => {
         />
       </SearchTypesContainer>
       <FlatList
+        contentContainerStyle={{ flex: 1 }}
         data={[]}
         renderItem={null}
         ListEmptyComponent={

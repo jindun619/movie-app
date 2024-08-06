@@ -42,6 +42,21 @@ interface GenderProps {
 const Gender = styled.Text<GenderProps>`
   color: ${props => (props.gender === 0 ? '#2986cc' : '#c90076')};
 `;
+const NoResultContainer = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`;
+const NoResultText = styled.Text`
+  font-size: 24px;
+  font-weight: 500;
+  color: ${props => props.theme.mainText};
+`;
+const NoresultText2 = styled.Text`
+  font-size: 18px;
+  font-weight: 400;
+  color: ${props => props.theme.neutralText};
+`;
 
 interface PersonDataType {
   page: number;
@@ -87,6 +102,14 @@ const PersonResult = ({ searchQuery }: PersonResultProps) => {
     </Item>
   );
 
+  if (peopleData?.pages[0].total_results === 0 && searchQuery !== '') {
+    return (
+      <NoResultContainer>
+        <NoResultText>결과 없음</NoResultText>
+        <NoresultText2>새로운 검색을 시도하십시오.</NoresultText2>
+      </NoResultContainer>
+    );
+  }
   return (
     <>
       <FlatList

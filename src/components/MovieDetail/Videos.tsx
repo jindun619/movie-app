@@ -36,6 +36,7 @@ const Videos = ({ data }: VideosProps) => {
       </Container>
     );
   }
+  return null;
 };
 
 export { Videos };

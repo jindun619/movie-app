@@ -14,12 +14,15 @@ interface RecommProps {
 const Recomm = ({ data }: RecommProps) => {
   const recommData = data.results.slice(0, 10);
 
-  return (
-    <Container>
-      <BlockTitle name="당신이 좋아할만한 영화들" />
-      <SimpleMovieList data={recommData} />
-    </Container>
-  );
+  if (data.results.length > 0) {
+    return (
+      <Container>
+        <BlockTitle name="당신이 좋아할만한 영화들" />
+        <SimpleMovieList data={recommData} />
+      </Container>
+    );
+  }
+  return null;
 };
 
 export { Recomm };
