@@ -47,9 +47,11 @@ const SearchBar = ({
         defaultValue={searchQuery}
         returnKeyType="search"
       />
-      <CancelBtn onPress={onPressCancel}>
-        <CancelIcon name="close-circle-outline" size={18} />
-      </CancelBtn>
+      {searchQuery.length > 0 && (
+        <CancelBtn onPress={onPressCancel}>
+          <CancelIcon name="close-circle-outline" size={18} />
+        </CancelBtn>
+      )}
     </Container>
   );
 };
