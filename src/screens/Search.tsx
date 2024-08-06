@@ -48,7 +48,7 @@ const Search = () => {
         />
       </SearchTypesContainer>
       <FlatList
-        contentContainerStyle={{ flex: 1 }}
+        contentContainerStyle={{ flexGrow: 1 }}
         data={[]}
         renderItem={null}
         ListEmptyComponent={

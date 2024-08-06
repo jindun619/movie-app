@@ -6,6 +6,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { RootNavParamList } from '../../navigations/RootNav';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { fetchData } from '../../utils/fetch';
+import { useEffect, useState } from 'react';
 
 const FlatList = styled.FlatList`` as unknown as typeof RNFlatList;
 const Separator = styled.View`
@@ -45,7 +46,7 @@ const NoResultText = styled.Text`
   font-weight: 500;
   color: ${props => props.theme.mainText};
 `;
-const NoresultText2 = styled.Text`
+const NoResultText2 = styled.Text`
   font-size: 18px;
   font-weight: 400;
   color: ${props => props.theme.neutralText};
@@ -63,6 +64,8 @@ interface MovieResultProps {
 const MovieResult = ({ searchQuery }: MovieResultProps) => {
   const navigation =
     useNavigation<StackNavigationProp<RootNavParamList, 'Tab'>>();
+
+  const [ShowNoResult, setShowNoResult] = useState<boolean>(false);
 
   const {
     data: movieData,
@@ -93,15 +96,20 @@ const MovieResult = ({ searchQuery }: MovieResultProps) => {
     </Item>
   );
 
-  if (movieData?.pages[0].total_results === 0 && searchQuery !== '') {
-    return (
-      <NoResultContainer>
-        <NoResultText>결과 없음</NoResultText>
-        <NoresultText2>새로운 검색을 시도하십시오.</NoresultText2>
-      </NoResultContainer>
-    );
-  }
-  return (
+  useEffect(() => {
+    if (movieData?.pages[0].total_results === 0 && searchQuery !== '') {
+      setShowNoResult(true);
+    } else {
+      setShowNoResult(false);
+    }
+  }, [movieData, searchQuery]);
+
+  return ShowNoResult ? (
+    <NoResultContainer>
+      <NoResultText>결과 없음</NoResultText>
+      <NoResultText2>새로운 검색을 시도하십시오.</NoResultText2>
+    </NoResultContainer>
+  ) : (
     <FlatList
       keyExtractor={item => item.id.toString()}
       data={movieData?.pages.flatMap(page => page.results) || []}

@@ -7,6 +7,7 @@ import { RootNavParamList } from '../../navigations/RootNav';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { fetchData } from '../../utils/fetch';
 import { translate } from '../../utils/utils';
+import { useEffect, useState } from 'react';
 
 const FlatList = styled.FlatList`` as unknown as typeof RNFlatList;
 const Separator = styled.View`
@@ -71,6 +72,8 @@ const PersonResult = ({ searchQuery }: PersonResultProps) => {
   const navigation =
     useNavigation<StackNavigationProp<RootNavParamList, 'Tab'>>();
 
+  const [showNoResult, setShowNoResult] = useState<boolean>(false);
+
   const {
     data: peopleData,
     hasNextPage,
@@ -102,32 +105,35 @@ const PersonResult = ({ searchQuery }: PersonResultProps) => {
     </Item>
   );
 
-  if (peopleData?.pages[0].total_results === 0 && searchQuery !== '') {
-    return (
-      <NoResultContainer>
-        <NoResultText>결과 없음</NoResultText>
-        <NoresultText2>새로운 검색을 시도하십시오.</NoresultText2>
-      </NoResultContainer>
-    );
-  }
-  return (
-    <>
-      <FlatList
-        keyExtractor={item => item.id.toString()}
-        data={peopleData?.pages.flatMap(page => page.results) || []}
-        renderItem={renderItem}
-        ItemSeparatorComponent={Separator}
-        onEndReached={() => {
-          if (hasNextPage) {
-            fetchNextPage();
-          }
-        }}
-        onEndReachedThreshold={0.25}
-        ListFooterComponent={() =>
-          isFetchingNextPage ? <ActivityIndicator size="small" /> : null
+  useEffect(() => {
+    if (peopleData?.pages[0].total_results === 0 && searchQuery !== '') {
+      setShowNoResult(true);
+    } else {
+      setShowNoResult(false);
+    }
+  }, [peopleData, searchQuery]);
+
+  return showNoResult ? (
+    <NoResultContainer>
+      <NoResultText>결과 없음</NoResultText>
+      <NoresultText2>새로운 검색을 시도하십시오.</NoresultText2>
+    </NoResultContainer>
+  ) : (
+    <FlatList
+      keyExtractor={item => item.id.toString()}
+      data={peopleData?.pages.flatMap(page => page.results) || []}
+      renderItem={renderItem}
+      ItemSeparatorComponent={Separator}
+      onEndReached={() => {
+        if (hasNextPage) {
+          fetchNextPage();
         }
-      />
-    </>
+      }}
+      onEndReachedThreshold={0.25}
+      ListFooterComponent={() =>
+        isFetchingNextPage ? <ActivityIndicator size="small" /> : null
+      }
+    />
   );
 };
 
