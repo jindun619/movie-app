@@ -19,6 +19,10 @@ const FlatList = styled.FlatList`
   width: 100%;
   padding-top: 10px;
 `;
+const ContentPlaceholder = styled.View`
+  width: 100%;
+  height: 245px;
+`;
 
 type PersonScreenProps = StackScreenProps<RootNavParamList, 'Person'>;
 const Person = ({ route }: PersonScreenProps) => {
@@ -50,13 +54,17 @@ const Person = ({ route }: PersonScreenProps) => {
         ListEmptyComponent={
           <>
             {personDetailLoading ? (
-              <Loading />
+              <ContentPlaceholder>
+                <Loading />
+              </ContentPlaceholder>
             ) : (
               personDetailData && <PersonInfo data={personDetailData} />
             )}
 
             {personDetailLoading || personDetailOriginalLoading ? (
-              <Loading />
+              <ContentPlaceholder>
+                <Loading />
+              </ContentPlaceholder>
             ) : (
               personDetailData &&
               personDetailOriginalData && (
@@ -71,7 +79,9 @@ const Person = ({ route }: PersonScreenProps) => {
             )}
 
             {personMovieCreditsLoading ? (
-              <Loading />
+              <ContentPlaceholder>
+                <Loading />
+              </ContentPlaceholder>
             ) : (
               personMovieCreditsData && (
                 <MovieCredits data={personMovieCreditsData} />

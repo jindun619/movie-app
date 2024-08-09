@@ -31,6 +31,15 @@ const BackdropImage = styled.Image`
   width: 100%;
   height: 300px;
 `;
+const BackdropPlaceholder = styled.View`
+  width: 100%;
+  height: 300px;
+`;
+const ContentPlaceholder = styled.View`
+  width: 100%;
+  height: 170px;
+`;
+
 const ScrollViewContent = styled.View``;
 
 type DetailScreenProps = StackScreenProps<RootNavParamList, 'Detail'>;
@@ -62,20 +71,25 @@ const Detail = ({ route }: DetailScreenProps) => {
   return (
     <Container>
       <ScrollView>
-        {detailData &&
-          (backdropError || !detailData.backdrop_path ? (
-            <BackdropImage source={require('../assets/no-image.png')} />
-          ) : (
-            <BackdropImage
-              source={{
-                uri: `https://image.tmdb.org/t/p/w780${detailData.backdrop_path}`,
-              }}
-              onError={() => setBackdropError(true)}
-            />
-          ))}
+        {!detailData ? (
+          <BackdropPlaceholder>
+            <Loading />
+          </BackdropPlaceholder>
+        ) : backdropError || !detailData.backdrop_path ? (
+          <BackdropImage source={require('../assets/no-image.png')} />
+        ) : (
+          <BackdropImage
+            source={{
+              uri: `https://image.tmdb.org/t/p/w780${detailData.backdrop_path}`,
+            }}
+            onError={() => setBackdropError(true)}
+          />
+        )}
         <ScrollViewContent>
           {detailLoading || creditsLoading ? (
-            <Loading />
+            <ContentPlaceholder>
+              <Loading />
+            </ContentPlaceholder>
           ) : (
             detailData &&
             creditsData && (
@@ -94,7 +108,9 @@ const Detail = ({ route }: DetailScreenProps) => {
           )}
 
           {detailLoading ? (
-            <Loading />
+            <ContentPlaceholder>
+              <Loading />
+            </ContentPlaceholder>
           ) : (
             detailData && (
               <Overview
@@ -105,25 +121,33 @@ const Detail = ({ route }: DetailScreenProps) => {
           )}
 
           {creditsLoading ? (
-            <Loading />
+            <ContentPlaceholder>
+              <Loading />
+            </ContentPlaceholder>
           ) : (
             creditsData && <Credits data={creditsData} />
           )}
 
           {videosLoading ? (
-            <Loading />
+            <ContentPlaceholder>
+              <Loading />
+            </ContentPlaceholder>
           ) : (
             videosData && <Videos data={videosData} />
           )}
 
           {detailLoading ? (
-            <Loading />
+            <ContentPlaceholder>
+              <Loading />
+            </ContentPlaceholder>
           ) : (
             detailData && <Production data={detailData} />
           )}
 
           {recommLoading ? (
-            <Loading />
+            <ContentPlaceholder>
+              <Loading />
+            </ContentPlaceholder>
           ) : (
             recommData && <Recomm data={recommData} />
           )}
