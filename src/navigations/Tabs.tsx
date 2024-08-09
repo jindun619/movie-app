@@ -25,7 +25,6 @@ const Tabs = () => {
           headerTitle: '홈',
           headerTitleAlign: 'left',
           headerTitleStyle: {
-            paddingVertical: 20,
             fontSize: 30,
             fontWeight: 600,
           },
