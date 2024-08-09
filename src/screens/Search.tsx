@@ -1,5 +1,4 @@
-import styled, { useTheme } from 'styled-components/native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import styled from 'styled-components/native';
 import { useEffect, useState } from 'react';
 import { SearchTypeBtn } from '../components/Search/SearchTypeBtns';
 import { MovieResult } from '../components/Search/MovieResult';
@@ -19,8 +18,6 @@ const SearchTypesContainer = styled.View`
 `;
 
 const Search = () => {
-  const theme = useTheme();
-
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [searchType, setSearchType] = useState(0);
 

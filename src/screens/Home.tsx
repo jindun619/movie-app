@@ -13,7 +13,12 @@ const Container = styled.View`
   background-color: ${props => props.theme.mainBg};
 `;
 const ScrollView = styled.ScrollView`
+  width: 100%;
   padding: 0 10px;
+`;
+const LoadingPlaceholder = styled.View`
+  width: 100%;
+  height: 160px;
 `;
 
 const Home = () => {
@@ -45,7 +50,9 @@ const Home = () => {
       <ScrollView>
         <Block title="지금 상영중">
           {nowPlayingMoviesLoading ? (
-            <Loading />
+            <LoadingPlaceholder>
+              <Loading />
+            </LoadingPlaceholder>
           ) : (
             nowPlayingMoviesData?.results && (
               <SimpleMovieList data={nowPlayingMoviesData.results} />
@@ -54,7 +61,9 @@ const Home = () => {
         </Block>
         <Block title="인기 영화">
           {popularMoviesLoading ? (
-            <Loading />
+            <LoadingPlaceholder>
+              <Loading />
+            </LoadingPlaceholder>
           ) : (
             popularMoviesData?.results && (
               <SimpleMovieList data={popularMoviesData.results} />
@@ -63,7 +72,9 @@ const Home = () => {
         </Block>
         <Block title="평점순">
           {topRatedMoviesLoading ? (
-            <Loading />
+            <LoadingPlaceholder>
+              <Loading />
+            </LoadingPlaceholder>
           ) : (
             topRatedMoviesData.results && (
               <SimpleMovieList data={topRatedMoviesData.results} />
@@ -72,7 +83,9 @@ const Home = () => {
         </Block>
         <Block title="인기 배우">
           {popularPeopleLoading ? (
-            <Loading />
+            <LoadingPlaceholder>
+              <Loading />
+            </LoadingPlaceholder>
           ) : (
             popularPeopleData.results && (
               <SimplePeopleList data={popularPeopleData.results} />

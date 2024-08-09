@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 import { RecommType } from '../../types/types';
 import { SimpleMovieList } from '../SimpleMovieList';
-import { BlockTitle } from '../BlockTitle';
+import { Block } from '../Block';
 
 const Container = styled.View`
   padding: 10px;
@@ -17,8 +17,9 @@ const Recomm = ({ data }: RecommProps) => {
   if (data.results.length > 0) {
     return (
       <Container>
-        <BlockTitle name="당신이 좋아할만한 영화들" />
-        <SimpleMovieList data={recommData} />
+        <Block title="당신이 좋아할 만한 영화들">
+          <SimpleMovieList data={recommData} />
+        </Block>
       </Container>
     );
   }

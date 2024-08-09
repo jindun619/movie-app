@@ -1,10 +1,10 @@
 import styled from 'styled-components/native';
 import { CastType, MovieCreditsType } from '../../types/types';
 import { FlatList as RNFlatList } from 'react-native-gesture-handler';
-import { BlockTitleWithMore } from '../BlockTitleWithMore';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootNavParamList } from '../../navigations/RootNav';
+import { Block } from '../Block';
 
 const Container = styled.View`
   padding: 10px;
@@ -59,16 +59,21 @@ const Credits = ({ data }: CreditsProps) => {
 
   return (
     <Container>
-      <BlockTitleWithMore
+      {/* <BlockTitleWithMore
         title="출연진"
         onPress={() => navigation.push('CreditsDetail', { data })}
-      />
-      <FlatList
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        data={data.cast.slice(0, 10)}
-        renderItem={renderItem}
-      />
+      /> */}
+      <Block
+        title="출연진"
+        moreIcon
+        onPress={() => navigation.push('CreditsDetail', { data })}>
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          data={data.cast.slice(0, 10)}
+          renderItem={renderItem}
+        />
+      </Block>
     </Container>
   );
 };

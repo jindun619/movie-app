@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 import { Block } from '../Block';
 
 const Container = styled.View`
-  padding: 15px;
+  padding: 10px;
   border: 1px solid ${props => props.theme.lightNeutralBg};
 `;
 const Tagline = styled.Text`

@@ -21,12 +21,13 @@ const Tabs = () => {
           tabBarIcon: ({ color, size }) => (
             <Icon name="home" size={size} color={color} />
           ),
+          tabBarLabelStyle: { fontWeight: 700, marginTop: -5 },
           title: '홈',
           headerTitle: '홈',
           headerTitleAlign: 'left',
           headerTitleStyle: {
             fontSize: 30,
-            fontWeight: 600,
+            fontWeight: 700,
           },
           headerTitleContainerStyle: { marginLeft: 10 },
           headerShadowVisible: false,
@@ -39,10 +40,14 @@ const Tabs = () => {
           tabBarIcon: ({ color, size }) => (
             <Icon name="search" size={size} color={color} />
           ),
+          tabBarLabelStyle: { fontWeight: 700, marginTop: -5 },
           title: '검색',
           headerTitle: '검색',
           headerTitleAlign: 'left',
-          headerTitleStyle: { paddingTop: 20, fontSize: 30, fontWeight: 600 },
+          headerTitleStyle: {
+            fontSize: 30,
+            fontWeight: 700,
+          },
           headerTitleContainerStyle: { marginLeft: 10 },
           headerShadowVisible: false,
         }}

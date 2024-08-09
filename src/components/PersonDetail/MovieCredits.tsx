@@ -11,6 +11,7 @@ import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootNavParamList } from '../../navigations/RootNav';
 import { translate } from '../../utils/utils';
+import { Block } from '../Block';
 
 const Container = styled.View`
   padding: 10px;
@@ -89,27 +90,25 @@ const MovieCredits = ({ data }: MovieCreditsProps) => {
   return (
     <Container>
       {data.cast.length > 0 && (
-        <>
-          <BlockTitle name="출연" />
+        <Block title="출연">
           <FlatList
             data={data.cast}
             renderItem={renderItem}
             keyExtractor={keyExtractor}
             ItemSeparatorComponent={Separator}
           />
-        </>
+        </Block>
       )}
       <MarginVertical></MarginVertical>
       {data.crew.length > 0 && (
-        <>
-          <BlockTitle name="제작" />
+        <Block title="제작">
           <FlatList
             data={data.crew}
             renderItem={renderItem}
             keyExtractor={keyExtractor}
             ItemSeparatorComponent={Separator}
           />
-        </>
+        </Block>
       )}
     </Container>
   );

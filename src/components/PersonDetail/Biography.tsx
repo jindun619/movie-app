@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import { BlockTitle } from '../BlockTitle';
+import { Block } from '../Block';
 
 const Container = styled.View`
   padding: 30px 10px;
@@ -18,10 +18,11 @@ interface BiographyProps {
 const Biography = ({ content, name }: BiographyProps) => {
   return (
     <Container>
-      <BlockTitle name="약력" />
-      <Content>
-        {content.length > 0 ? content : `${name}의 약력 란이 비어있습니다.`}
-      </Content>
+      <Block title="약력">
+        <Content>
+          {content.length > 0 ? content : `${name}의 약력 란이 비어있습니다.`}
+        </Content>
+      </Block>
     </Container>
   );
 };

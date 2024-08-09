@@ -2,7 +2,7 @@ import { FlatList as RNFlatList } from 'react-native';
 import styled from 'styled-components/native';
 import { MovieDetailType, ProductionCompanyType } from '../../types/types';
 import { useColorScheme } from 'react-native';
-import { BlockTitle } from '../BlockTitle';
+import { Block } from '../Block';
 
 const FlatList = styled.FlatList`` as unknown as typeof RNFlatList;
 const Container = styled.View`
@@ -57,14 +57,15 @@ const Production = ({ data }: ProductionProps) => {
   if (data.production_companies.length > 0) {
     return (
       <Container>
-        <BlockTitle name="제작사" />
-        <FlatList
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          data={data.production_companies}
-          renderItem={renderItem}
-          ItemSeparatorComponent={Separator}
-        />
+        <Block title="제작사">
+          <FlatList
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            data={data.production_companies}
+            renderItem={renderItem}
+            ItemSeparatorComponent={Separator}
+          />
+        </Block>
       </Container>
     );
   }
