@@ -45,13 +45,13 @@ Infinite Scroll 기능 지원.
 
 #### 영화 티저/트레일러
 
-[React Native Youtube-iframe](https://lonelycpp.github.io/react-native-youtube-iframe/)을 이용한 동영상 임베드
+- [React Native Youtube-iframe](https://lonelycpp.github.io/react-native-youtube-iframe/)을 이용한 동영상 임베드
 
 #### 제작사
 
 #### 영화 추천
 
-비슷한 영화들을 추천
+- 비슷한 영화들을 추천
 
 <img src="./src/assets/readme_images/movie_detail.gif" width="100" alt="movie_detail">
 
@@ -74,7 +74,7 @@ Infinite Scroll 기능 지원.
 
 <img src="./src/assets/readme_images/dark_mode.gif" width="100" alt="dark_mode">
 
-### 기능들
+### 그 외 기능들
 
 - 네비게이션 ([React Navigation](https://reactnavigation.org/))
 - 데이터 캐싱 ([TanStack Query](https://tanstack.com/query/latest/docs/framework/react/overview))
