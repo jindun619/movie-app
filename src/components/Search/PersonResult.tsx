@@ -41,7 +41,12 @@ interface GenderProps {
   gender: number;
 }
 const Gender = styled.Text<GenderProps>`
-  color: ${props => (props.gender === 0 ? '#2986cc' : '#c90076')};
+  color: ${props =>
+    props.gender === 2
+      ? '#2986cc'
+      : props.gender === 1
+      ? '#c90076'
+      : props.theme.mainText};
 `;
 const NoResultContainer = styled.View`
   flex: 1;
@@ -100,7 +105,9 @@ const PersonResult = ({ searchQuery }: PersonResultProps) => {
         <Department>
           {translate.department(item.known_for_department)}
         </Department>
-        <Gender gender={item.gender}>{item.gender === 0 ? '♂️' : '♀️'}</Gender>
+        <Gender gender={item.gender}>
+          {item.gender === 2 ? '♂️' : item.gender === 1 ? '♀️' : '?'}
+        </Gender>
       </Info>
     </Item>
   );
