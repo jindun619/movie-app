@@ -1,79 +1,80 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# 🎬영화앱
 
-# Getting Started
+## 📚사용 스택
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+![react native](https://img.shields.io/badge/react_native-61DAFB?style=for-the-badge&logo=react&logoColor=white)![typescript](https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)![react-query](https://img.shields.io/badge/react_query-FF4154?style=for-the-badge&logo=react-query&logoColor=white)![styled-components](https://img.shields.io/badge/styled_components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)
 
-## Step 1: Start the Metro Server
+# 🔗API
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+[TMDB API](https://developer.themoviedb.org/docs/getting-started)
 
-To start Metro, run the following command from the _root_ of your React Native project:
+## 💡기능들
 
-```bash
-# using npm
-npm start
+### Home Screen
 
-# OR using Yarn
-yarn start
-```
+지금 상영중, 인기 영화, 평점순, 인기 배우 추천.
 
-## Step 2: Start your Application
+영화: 포스터, 제목, 평점 등 기본 정보 표시
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+배우: 인물 사진, 이름 표시
 
-### For Android
+<img src="./src/assets/readme_images/home_screen.gif" width="100" alt="home_screen">
 
-```bash
-# using npm
-npm run android
+### Search Screen
 
-# OR using Yarn
-yarn android
-```
+영화, 인물 검색 기능.
 
-### For iOS
+Infinite Scroll 기능 지원.
 
-```bash
-# using npm
-npm run ios
+<img src="./src/assets/readme_images/search_movie.gif" width="100" alt="search_movie"><img src="./src/assets/readme_images/search_person.gif" width="100" alt="search_movie">
 
-# OR using Yarn
-yarn ios
-```
+### Movie Detail Screen
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+#### 영화 기본 정보
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+- 포스터/백드롭 이미지
+- 영화 제목/원제
+- 개봉일/러닝 타임
+- 감독
+- 평점
+- 장르
 
-## Step 3: Modifying your App
+#### 영화 개요/캐치프레이즈
 
-Now that you have successfully run the app, let's modify it.
+#### 영화 출연진
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+#### 영화 티저/트레일러
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
+[React Native Youtube-iframe](https://lonelycpp.github.io/react-native-youtube-iframe/)을 이용한 동영상 임베드
 
-## Congratulations! :tada:
+#### 제작사
 
-You've successfully run and modified your React Native App. :partying_face:
+#### 영화 추천
 
-### Now what?
+비슷한 영화들을 추천
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
+<img src="./src/assets/readme_images/movie_detail.gif" width="100" alt="movie_detail">
 
-# Troubleshooting
+### Person Detail Screen
 
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+#### 인물 기본 정보
 
-# Learn More
+- 전문 분야
+- 성별
+- 생일
+- 출생지
 
-To learn more about React Native, take a look at the following resources:
+#### 인물 약력
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+#### 출연작/제작 정보
+
+<img src="./src/assets/readme_images/person_detail.gif" width="100" alt="person_detail">
+
+### Dark Mode
+
+<img src="./src/assets/readme_images/dark_mode.gif" width="100" alt="dark_mode">
+
+### 기능들
+
+- 네비게이션 ([React Navigation](https://reactnavigation.org/))
+- 데이터 캐싱 ([TanStack Query](https://tanstack.com/query/latest/docs/framework/react/overview))
